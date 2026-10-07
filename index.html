@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ashee B Bansaal</title>
+  <meta name="description" content="Ashee B Bansaal — CS at Cornell. Software and machine learning engineering: backend systems, real-time pipelines, GPU and training infrastructure.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#about">Skip to content</a>
+
+  <header class="hero" id="hero">
+    <canvas class="blob" id="blob" aria-hidden="true"></canvas>
+    <canvas class="touch" id="touch" aria-hidden="true"></canvas>
+    <p class="corner corner--l">Portfolio <span>vol. 1</span> · Fall 2026</p>
+    <p class="corner corner--r">Ithaca, NY · <span class="clock">--:--</span></p>
+    <div class="hero-inner">
+      <h1 class="reveal"><em>Ashee B Bansaal</em></h1>
+      <p class="hero-sub reveal"><span>Software &amp; ML Engineering</span> · <span>CS @ Cornell</span></p>
+      <span class="key-wrap reveal">
+        <a class="btn key" id="key" href="resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <span class="note note--hero" aria-hidden="true">go on, tap around
+          <svg viewBox="0 0 60 40"><path d="M56 6 C 40 4, 22 10, 8 30 M8 30 L 9 18 M8 30 L 19 26"/></svg></span>
+      </span>
+    </div>
+    <div class="readout" aria-live="off">
+      <p>Tap anywhere. This page is learning where your clicks land around the Résumé button, the way <a href="#projects">CalibraType</a> learns where a thumb lands on a key.</p>
+      <p class="stats" id="stats">n = 0</p>
+    </div>
+    <a class="scroll-cue" href="#about" aria-label="Scroll to content">
+      <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+    </a>
+  </header>
+
+  <nav class="bar" aria-label="Primary">
+    <ul class="bar-icons">
+      <li><a href="mailto:ab3235@cornell.edu" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></a></li>
+      <li><a href="https://github.com/ashee-b-bansaal" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="fill"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.7c-2.6.6-3.2-1.2-3.2-1.2-.4-1.1-1-1.4-1-1.4-.9-.6 0-.6 0-.6 1 .1 1.5 1 1.5 1 .8 1.5 2.3 1 2.8.8.1-.6.3-1 .6-1.2-2.1-.2-4.3-1-4.3-4.7 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a9 9 0 0 1 4.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.2.1 2.5.6.7 1 1.6 1 2.6 0 3.7-2.2 4.5-4.3 4.7.3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5z"/></svg></a></li>
+      <li><a href="https://linkedin.com/in/ashee-b-bansaal" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="fill"><path d="M4.5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM3 9h3v11.5H3zM9 9h2.9v1.6c.4-.8 1.4-1.8 3.2-1.8 3.2 0 3.9 2.1 3.9 4.9v6.6h-3v-5.8c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.9H9z"/></svg></a></li>
+    </ul>
+    <a class="bar-name" href="#"><em>Ashee B Bansaal</em></a>
+    <ul class="bar-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about" class="band band--ink">
+      <div class="wrap about">
+        <div class="portrait">
+          <span aria-hidden="true"><em>AB</em></span>
+          <!-- Drop a photo at photo.jpg; until then the monogram shows. -->
+          <img src="photo.jpg" alt="Ashee B Bansaal" onerror="this.remove()">
+          <span class="note note--about" aria-hidden="true">hi, it’s me
+            <svg viewBox="0 0 60 40"><path d="M4 8 C 20 4, 40 12, 50 32 M50 32 L 52 20 M50 32 L 40 28"/></svg></span>
+        </div>
+        <div class="about-text">
+          <p class="kicker"><small>i.</small> About</p>
+          <h2>I’m Ashee, a CS junior at Cornell. I build software, and the machine learning systems that run inside it.</h2>
+          <p>The parts of ML I like best are really systems problems: getting a model to answer inside a latency budget, making training runs reproducible, rewriting the slow step in CUDA. Before any of that I shipped Android and backend features to 150K monthly users at Cult.fit, which is where I learned to care about p95s, retries, and what happens when a device goes offline mid-sync.</p>
+          <p>I study Computer Science (Honors, ML/AI track) with a minor in ECE, and I’m TAing Machine Learning this fall. <!-- EDIT: a line about you outside of work. --></p>
+          <p class="seeking">Looking for <strong>Summer 2027</strong> software engineering and ML engineering internships.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="band">
+      <div class="wrap">
+        <h2 class="section-title"><small>ii.</small><em>Experience</em></h2>
+        <ol class="timeline">
+          <li class="t-item">
+            <article class="card">
+              <header class="card-head">
+                <span class="logo" aria-hidden="true">CMU</span>
+                <div><h3>ML Research Intern</h3><p class="org">Carnegie Mellon University · Semantic Signal Lab</p></div>
+              </header>
+              <p class="when">Jun 2026 – Aug 2026 <span>Pittsburgh, PA</span></p>
+              <p>Built a GPU embedding-deduplication engine in CUDA/PyTorch that matched the CPU reference exactly on 3,700+ targets in 283&nbsp;s. Also built the vector-embedding retrieval layer for a long-video memory system and a cross-session identity tracker (DINOv2 + Sinkhorn) over 10+ hours of footage.</p>
+              <ul class="tags"><li>PyTorch</li><li>CUDA</li><li>Vector search</li><li>DINOv2</li></ul>
+            </article>
+          </li>
+          <li class="t-item is-now">
+            <article class="card">
+              <header class="card-head">
+                <span class="logo" aria-hidden="true">C</span>
+                <div><h3>Founder &amp; ML Engineer</h3><p class="org">Cognify</p></div>
+              </header>
+              <p class="when">Aug 2025 – Present <span>Ithaca, NY</span></p>
+              <p>Building a hands-free control interface driven by EEG. Real-time classifier ensemble at 93% accuracy; containerized training and deployment with Docker, Kubernetes, and Optuna sweeps, cutting an experiment cycle from five days to two.</p>
+              <ul class="tags"><li>PyTorch</li><li>Docker</li><li>Kubernetes</li><li>Optuna</li></ul>
+            </article>
+          </li>
+          <li class="t-item">
+            <article class="card">
+              <header class="card-head">
+                <span class="logo" aria-hidden="true">Sci-Fi</span>
+                <div><h3>Machine Learning Intern</h3><p class="org">Cornell University · Sci-Fi Lab</p></div>
+              </header>
+              <p class="when">Jun 2025 – Aug 2025 <span>Ithaca, NY</span></p>
+              <p>Built a PyTorch Conformer-CTC training pipeline over 6K+ multimodal sequences, plus the evaluation tooling and cross-user / 5-fold personalization setup. Reached 98.9% accuracy on 35 classes; multitask learning beat the baseline by 24%.</p>
+              <ul class="tags"><li>PyTorch</li><li>Conformer</li><li>Eval tooling</li></ul>
+            </article>
+          </li>
+          <li class="t-item">
+            <article class="card">
+              <header class="card-head">
+                <span class="logo" aria-hidden="true">cult</span>
+                <div><h3>Software Engineer Intern</h3><p class="org">Cult.fit · Android &amp; Backend</p></div>
+              </header>
+              <p class="when">May 2024 – Jul 2024 <span>Bengaluru, India</span><!-- EDIT: confirm location --></p>
+              <p>Shipped Health Connect sync to a 150K-MAU Android app across 6+ wearable sources. Built coroutine pipelines with circuit breakers and retries handling 500K+ events/day at &lt;100&nbsp;ms p95, cut SQLite latency 60% with WAL, and ran Firebase → BigQuery A/B tests across 50K users.</p>
+              <ul class="tags"><li>Kotlin</li><li>Java</li><li>Coroutines</li><li>SQLite</li><li>BigQuery</li></ul>
+            </article>
+          </li>
+          <li class="t-item is-now">
+            <article class="card">
+              <header class="card-head">
+                <span class="logo" aria-hidden="true">XR</span>
+                <div><h3>Sub-team Lead</h3><p class="org">Cornell Extended Reality Project Team</p></div>
+              </header>
+              <p class="when">Jan 2025 – Present <span>Ithaca, NY</span></p>
+              <p>Lead a team of six: GitHub Actions CI, code review, and sprint planning, which cut integration bugs by 40%. Built a real-time 256&nbsp;Hz streaming inference pipeline (FFT features) at 82% accuracy across 20+ users.</p>
+              <ul class="tags"><li>Python</li><li>CI/CD</li><li>Streaming</li></ul>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="band band--soft">
+      <div class="wrap">
+        <h2 class="section-title"><small>iii.</small><em>Projects</em></h2>
+        <div class="grid">
+          <article class="card project">
+            <div class="figure" aria-hidden="true">
+              <svg viewBox="0 0 240 120">
+                <g class="ln"><rect x="10" y="50" width="38" height="20" rx="2"/><rect x="66" y="22" width="38" height="20" rx="2"/><rect x="66" y="78" width="38" height="20" rx="2"/><rect x="122" y="22" width="38" height="20" rx="2"/><rect x="122" y="78" width="38" height="20" rx="2"/><rect x="190" y="50" width="40" height="20" rx="2"/>
+                <path d="M48 60 L66 32 M48 60 L66 88 M104 32 H122 M104 88 H122 M160 32 L190 60 M160 88 L190 60"/></g>
+                <g class="tx"><text x="29" y="63">mic</text><text x="85" y="35">asr</text><text x="85" y="91">pose</text><text x="141" y="35">llm</text><text x="141" y="91">tflite</text><text x="210" y="63">ui</text></g>
+              </svg>
+            </div>
+            <h3>Select-or-Sign</h3>
+            <p class="sub">Real-time AR communication interface</p>
+            <p>Seven async tasks (Whisper ASR, GPT-4o, MediaPipe hand tracking) orchestrated end to end in under a second. Includes an on-device TFLite gesture model trained on 5K+ poses that calibrates to a new user in under five minutes.</p>
+            <ul class="tags"><li>Python asyncio</li><li>Whisper</li><li>GPT-4o</li><li>TFLite</li></ul>
+          </article>
+
+          <article class="card project">
+            <div class="figure" aria-hidden="true">
+              <svg viewBox="0 0 240 120">
+                <g class="ln"><path d="M40 30 L100 60 L170 28 M100 60 L90 100 M100 60 L180 92 M170 28 L210 60 L180 92 M40 30 L30 80 L90 100"/></g>
+                <g class="nd"><circle cx="40" cy="30" r="6"/><circle cx="100" cy="60" r="9"/><circle cx="170" cy="28" r="6"/><circle cx="90" cy="100" r="5"/><circle cx="180" cy="92" r="7"/><circle cx="210" cy="60" r="5"/><circle cx="30" cy="80" r="5"/></g>
+              </svg>
+            </div>
+            <h3>Spatial Moves</h3>
+            <p class="sub">Personalized learning platform · Cornell DAIL Lab</p>
+            <p>Full-stack: a React/TypeScript/D3 interface for interactive, personalized skill graphs, backed by Python and Node vector-search services over FAISS, Pinecone, and Neo4j that generate 100+ adaptive learning nodes.</p>
+            <ul class="tags"><li>React</li><li>TypeScript</li><li>D3</li><li>Node</li><li>FAISS</li><li>Neo4j</li></ul>
+          </article>
+
+          <article class="card project">
+            <span class="note note--card" aria-hidden="true">the top of this page is a tiny version of this ↑</span>
+            <div class="figure" aria-hidden="true">
+              <svg viewBox="0 0 240 120">
+                <g class="ln"><rect x="12" y="20" width="38" height="36" rx="4"/><rect x="56" y="20" width="38" height="36" rx="4"/><rect x="100" y="20" width="38" height="36" rx="4"/><rect x="144" y="20" width="38" height="36" rx="4"/><rect x="188" y="20" width="38" height="36" rx="4"/>
+                <rect x="32" y="64" width="38" height="36" rx="4"/><rect x="76" y="64" width="38" height="36" rx="4"/><rect x="120" y="64" width="38" height="36" rx="4"/><rect x="164" y="64" width="38" height="36" rx="4"/></g>
+                <g class="ac"><ellipse cx="30" cy="42" rx="11" ry="7" transform="rotate(-15 30 42)"/><ellipse cx="76" cy="40" rx="10" ry="7"/><ellipse cx="117" cy="43" rx="12" ry="7" transform="rotate(10 117 43)"/><ellipse cx="164" cy="40" rx="10" ry="6"/><ellipse cx="52" cy="84" rx="11" ry="7" transform="rotate(-8 52 84)"/><ellipse cx="96" cy="85" rx="10" ry="7"/><ellipse cx="140" cy="82" rx="11" ry="6" transform="rotate(12 140 82)"/></g>
+              </svg>
+            </div>
+            <h3>CalibraType</h3>
+            <p class="sub">Calibration-free adaptive mobile keyboard</p>
+            <p>An online probabilistic model in C++ that keeps a 2D Gaussian per key and updates it from noisy real-world touches, so the keyboard adapts to the user with no setup. Reduced input error by 28%.</p>
+            <ul class="tags"><li>C++</li><li>Online learning</li><li>Mobile</li></ul>
+          </article>
+
+          <article class="card project">
+            <div class="figure" aria-hidden="true">
+              <svg viewBox="0 0 240 120">
+                <g class="ln"><path d="M14 104 H226"/><rect x="24" y="74" width="20" height="30"/><rect x="54" y="56" width="20" height="48"/><rect x="84" y="64" width="20" height="40"/><rect x="114" y="40" width="20" height="64"/><rect x="144" y="30" width="20" height="74"/></g>
+                <g class="ac"><rect x="174" y="18" width="20" height="86"/><rect x="204" y="22" width="20" height="82"/></g>
+              </svg>
+            </div>
+            <h3>Cognify</h3>
+            <p class="sub">EEG-driven hands-free interface</p>
+            <p>Conv-LSTM attention ensembles for real-time classification (93%, 40% faster training), and an EEGNet + temporal CNN pipeline that raised a second task from 75% to 81%. Training and deployment run in containers on Kubernetes.</p>
+            <ul class="tags"><li>PyTorch</li><li>EEGNet</li><li>Kubernetes</li><li>Optuna</li></ul>
+          </article>
+          <!-- Add more projects by copying an <article class="card project"> block. -->
+        </div>
+        <p class="more">More on <a href="https://github.com/ashee-b-bansaal">GitHub</a>.</p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="band">
+      <div class="wrap">
+        <h2 class="section-title"><small>iv.</small><em>Skills</em></h2>
+        <div class="skills">
+          <div><h3>Languages</h3><p>Python, Java, Kotlin, C/C++, Go, TypeScript, JavaScript, SQL, Swift, Rust, Bash</p></div>
+          <div><h3>Backend &amp; Data</h3><p>REST, gRPC, FastAPI, Flask, PostgreSQL, SQLite, Redis, Neo4j, BigQuery, Firebase</p></div>
+          <div><h3>ML</h3><p>PyTorch, TensorFlow / TFLite, CUDA, FAISS, Pinecone, Optuna</p></div>
+          <div><h3>Infra &amp; Tools</h3><p>AWS, GCP, Docker, Kubernetes, GitHub Actions, Linux, Git</p></div>
+        </div>
+        <p class="edu"><em>Cornell University</em>, B.S. Computer Science (Honors) · Minor in ECE · GPA 3.85 · May 2028</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p class="cta"><em>Say hello</em>: <a href="mailto:ab3235@cornell.edu">ab3235@cornell.edu</a>
+        <span class="note note--foot" aria-hidden="true">I actually reply :)</span></p>
+      <p class="small"><span>Hand-written HTML &amp; CSS · Last updated October 2026</span><span>It’s <span class="clock">--:--</span> in Ithaca</span></p>
+    </div>
+    <p class="wordmark" aria-hidden="true"><em>Ashee B Bansaal</em></p>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

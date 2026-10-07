@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pick a Direction</title>
+  <style>
+    :root { --bg: #f6f5f2; --ink: #161616; --muted: #6d6a64; --hair: #e2dfd8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, sans-serif; padding: 56px 16px; }
+    main { max-width: 1000px; margin: 0 auto; }
+    h1 { font-size: 30px; letter-spacing: -0.02em; margin: 0 0 6px; }
+    p.lead { color: var(--muted); margin: 0 0 32px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    a.card { display: block; text-decoration: none; color: inherit; background: #fff; border: 1px solid var(--hair); border-radius: 16px; padding: 22px; transition: transform .2s, box-shadow .2s; }
+    a.card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.07); }
+    .sw { height: 120px; border-radius: 10px; margin-bottom: 16px; }
+    .f .sw { background: radial-gradient(circle at 30% 40%, #a7e5d3, transparent 50%), radial-gradient(circle at 70% 60%, #c8b8e0, transparent 50%), radial-gradient(circle at 50% 90%, #f4c5a8, transparent 50%), #f5f5f5; }
+    .s .sw { background: linear-gradient(90deg, #dceeb1 0 25%, #c5b0f4 25% 50%, #f3c9b6 50% 75%, #c8e6cd 75%); }
+    .p .sw { background: linear-gradient(180deg, #eef6fd, #dcecfa); }
+    h2 { margin: 0 0 6px; font-size: 20px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Three directions</h1>
+    <p class="lead">Same content and timeline in each; different personality. Open each and move your mouse around the first screen.</p>
+    <div class="grid">
+      <a class="card f" href="fractal/index.html"><div class="sw"></div><h2>Fractal</h2><p>Editorial and calm. A live Julia set you reshape with the cursor; every project draws its own fractal.</p></a>
+      <a class="card s" href="scrapbook/index.html"><div class="sw"></div><h2>Scrapbook</h2><p>Playful and photo-led. Draggable polaroids, taped notes, colour-block project pages, ticket-stub hobbies.</p></a>
+      <a class="card p" href="penguin/index.html"><div class="sw"></div><h2>Penguin</h2><p>Friendly and warm. Pebble the penguin watches your cursor, talks, and belly-slides down your timeline.</p></a>
+    </div>
+  </main>
+</body>
+</html>

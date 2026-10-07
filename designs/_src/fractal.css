@@ -1,0 +1,80 @@
+/* ── FRACTAL: editorial print magazine (ElevenLabs-inspired tokens) ── */
+:root {
+  --bg: #f5f5f5; --canvas-soft: #fafafa; --card: #ffffff; --surface: #f0efed;
+  --ink: #0c0a09; --body: #4e4e4e; --muted: #777169;
+  --hair: #e7e5e4; --hair-strong: #d6d3d1;
+  --accent: #8a6fd1;
+  --mint: #a7e5d3; --peach: #f4c5a8; --lavender: #c8b8e0; --sky: #a8c8e8; --rose: #e8b8c4;
+  --display: "Newsreader", "Times New Roman", serif;
+  --sans: "Inter", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --r-card: 16px; --btn-bg: #292524; --btn-bg-hover: #0c0a09;
+}
+body { font-size: 16px; line-height: 1.55; letter-spacing: .16px; }
+h1, h2, .about-text h2, .proj h3, .hob h3, .exp-card h3, .skills h3 { font-family: var(--display); font-weight: 300; }
+
+/* hero */
+#julia { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 46% 34% at 50% 50%, rgba(245,245,245,.92), rgba(245,245,245,.55) 55%, rgba(245,245,245,0) 100%); }
+.hero h1 { font: 300 clamp(48px, 8.4vw, 104px)/1.02 var(--display); letter-spacing: -0.03em; }
+.hero-sub { font-size: clamp(16px, 1.8vw, 19px); color: var(--body); margin: 18px 0 30px; }
+.formula { position: absolute; z-index: 3; left: var(--gutter); bottom: 22px; margin: 0; display: flex; flex-direction: column; gap: 2px; text-align: left;
+  font: 400 12px/1.5 var(--mono); color: var(--ink); opacity: .7; }
+.formula .hint { color: var(--muted); }
+.no-webgl #julia { background: radial-gradient(circle at 25% 30%, var(--mint), transparent 40%), radial-gradient(circle at 75% 25%, var(--peach), transparent 40%), radial-gradient(circle at 60% 80%, var(--lavender), transparent 45%), radial-gradient(circle at 20% 80%, var(--sky), transparent 40%); }
+
+/* nav */
+.nav-name { font: italic 300 22px/1 var(--display); }
+
+/* section heads */
+.sec-head h2 { font-size: clamp(38px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.02em; }
+.epigraph { font: italic 300 20px/1.4 var(--display); }
+.about-text h2 { font-size: clamp(26px, 3vw, 34px); line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 22px; }
+.portrait { background: radial-gradient(circle at 30% 30%, var(--mint), transparent 60%), radial-gradient(circle at 70% 75%, var(--lavender), transparent 60%), var(--canvas-soft); }
+.about-sec { background: var(--canvas-soft); }
+
+/* timeline */
+.exp-card h3 { font-size: 22px; }
+.logo { background: var(--surface); font-size: 11px; }
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.05); border-color: var(--hair-strong); }
+
+/* projects: alternating editorial spreads with a generated fractal */
+.proj-list { display: grid; gap: clamp(56px, 8vw, 96px); }
+.proj { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.proj.flip .proj-art { order: 2; }
+.proj-art { position: relative; aspect-ratio: 5 / 4; border-radius: 24px; overflow: hidden; background: var(--canvas-soft); }
+.proj-art::before { content: ""; position: absolute; inset: -20%; background: radial-gradient(circle at 35% 40%, var(--tint) 0%, transparent 55%), radial-gradient(circle at 70% 70%, var(--tint2) 0%, transparent 50%); filter: blur(10px); }
+.tint-lavender { --tint: var(--lavender); --tint2: var(--sky); }
+.tint-mint { --tint: var(--mint); --tint2: var(--sky); }
+.tint-sky { --tint: var(--sky); --tint2: var(--lavender); }
+.tint-peach { --tint: var(--peach); --tint2: var(--rose); }
+.tint-rose { --tint: var(--rose); --tint2: var(--peach); }
+.fractal { position: absolute; inset: 0; width: 100%; height: 100%; }
+.art-label { position: absolute; left: 16px; bottom: 14px; font: 400 11px/1 var(--mono); color: var(--ink); opacity: .55; letter-spacing: .08em; text-transform: uppercase; }
+.proj h3 { font-size: clamp(34px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.02em; }
+.proj-tag { font: italic 300 21px/1.3 var(--display) !important; }
+.proj-body > p:not(.proj-ctx):not(.proj-tag) { color: var(--body); margin: 0 0 18px; }
+
+/* hobbies: pastel orb cards */
+.hob { position: relative; overflow: hidden; border: none; background: var(--canvas-soft); border-radius: 24px; }
+.hob::before { content: ""; position: absolute; width: 220px; height: 220px; right: -70px; top: -80px; border-radius: 50%; background: var(--tint); filter: blur(30px); opacity: .9; }
+.hob > * { position: relative; }
+.hob h3 { font-size: 26px; }
+
+.skills-sec { background: var(--canvas-soft); }
+.edu em { font: italic 300 20px var(--display); color: var(--ink); }
+
+/* footer with a growing fern */
+.foot { padding-bottom: 0; }
+.fern { display: block; width: 100%; height: 260px; margin-top: 24px; }
+.cta em { font-style: italic; }
+
+@media (max-width: 900px) {
+  .proj, .proj.flip { grid-template-columns: 1fr; }
+  .proj.flip .proj-art { order: 0; }
+}
+@media (max-width: 680px) {
+  .formula .hint { display: none; }
+  .stat b { font-size: 34px; }
+}
