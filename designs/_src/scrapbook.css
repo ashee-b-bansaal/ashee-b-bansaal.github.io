@@ -18,12 +18,22 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 
 /* hero: a table of photos */
 .hero { background: var(--bg); }
+#julia { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
+.hero-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 40% 30% at 50% 50%, rgba(255,255,255,.78), rgba(255,255,255,.32) 60%, rgba(255,255,255,0) 100%); }
+.no-webgl #julia { background: radial-gradient(circle at 25% 30%, var(--mint), transparent 40%), radial-gradient(circle at 75% 25%, var(--coral), transparent 40%), radial-gradient(circle at 60% 80%, var(--lilac), transparent 45%), radial-gradient(circle at 20% 80%, var(--sky, #cfe0f4), transparent 40%); }
 .table { position: absolute; inset: 0; z-index: 2; }
-.hero h1 { font: 340 clamp(54px, 9vw, 112px)/.98 var(--display); letter-spacing: -0.035em; }
+.hero h1 { font: 340 clamp(44px, 8.8vw, 112px)/.98 var(--display); letter-spacing: -0.035em; text-wrap: balance; }
 .hero-sub { font-size: clamp(18px, 2vw, 24px); font-weight: 340; margin: 18px 0 30px; }
 .hero .hint { margin: 26px 0 0; font-size: 21px; color: var(--muted); transform: rotate(-2deg); }
 .hero-inner { pointer-events: none; }
 .hero-inner a { pointer-events: auto; }
+.hero h1 .hero-name { position: relative; display: inline-block; }
+/* the penguin perches on the last letter of the name */
+.name-penguin { position: absolute; right: -.06em; bottom: calc(100% - .2em); width: max(.44em, 30px); height: auto; rotate: 6deg; transform-origin: 50% 100%;
+  filter: drop-shadow(0 3px 3px rgba(0,0,0,.14)); animation: perch-bob 3.4s ease-in-out infinite; }
+@keyframes perch-bob { 0%,100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-3px) scaleY(1.02); } }
+body.no-webgl .hero { background: var(--bg); }
 
 .polaroid { margin: 0; background: #fff; padding: 10px 10px 0; width: clamp(130px, 13vw, 190px); box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 24px rgba(0,0,0,.10); position: relative; }
 .polaroid .photo { position: relative; aspect-ratio: 1; overflow: hidden; display: grid; place-items: center; }
@@ -76,11 +86,24 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   background: color-mix(in srgb, var(--lime) 80%, transparent); }
 .t-item:nth-child(3n+2) .exp-card::before { background: color-mix(in srgb, var(--lilac) 80%, transparent); rotate: -4deg; }
 .t-item:nth-child(3n) .exp-card::before { background: color-mix(in srgb, var(--coral) 85%, transparent); }
+.timeline::before { width: 4px; margin-left: -2px; border-radius: 3px; background: linear-gradient(var(--lilac), var(--coral), var(--mint)); }
+.slider { position: absolute; left: 50%; top: 0; width: 54px; z-index: 5; translate: -50% 0; pointer-events: none; will-change: transform; }
+.slide-penguin { width: 54px; height: auto; rotate: -12deg; filter: drop-shadow(0 3px 3px rgba(0,0,0,.15)); transition: rotate .3s; }
+.slider.moving .slide-penguin { rotate: -70deg; }
 .exp-card:hover { rotate: 0deg; transform: translateY(-3px); }
 .exp-card h3 { font-weight: 600; }
 .logo { background: var(--surface); border-radius: 50%; }
 .t-item::after { border-color: #000; }
 .t-item.is-now::after { background: var(--accent); border-color: var(--accent); }
+
+/* the same hand-drawn penguin joins the name and timeline */
+.penguin { display: block; overflow: visible; }
+.flip-l, .flip-r { transform-box: view-box; transition: rotate .25s ease; }
+.flip-l { transform-origin: 44px 120px; }
+.flip-r { transform-origin: 156px 120px; }
+.penguin.wave .flip-r { animation: wave .9s ease-in-out 2; }
+@keyframes wave { 0%,100% { rotate: 0deg; } 50% { rotate: -55deg; } }
+.slider .penguin { width: 100%; }
 
 /* projects: scrapbook pages on colour blocks */
 .pages { display: grid; gap: 28px; }
@@ -126,10 +149,17 @@ h1, h2, h3 { letter-spacing: -0.02em; }
   .page, .page.flip { grid-template-columns: 1fr; }
   .page.flip .page-art { order: 0; }
   .table .polaroid { width: 110px; }
+  .slider { left: 5px; width: 44px; }
+  .slide-penguin { width: 44px; }
 }
 @media (max-width: 680px) {
+  .hero h1 { font-size: clamp(40px, 9vw, 64px); }
   .table .polaroid { width: 92px; padding: 6px 6px 0; }
   .table .polaroid figcaption { font-size: 13px; padding: 6px 2px 8px; }
   .table .polaroid:nth-child(n+5) { display: none; }
   .hero .hint { font-size: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-penguin { animation: none; }
 }

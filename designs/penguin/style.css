@@ -178,24 +178,12 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 
 /* the penguin */
 .penguin { display: block; overflow: visible; }
-.penguin .ink { fill: #1f2433; }
-.penguin .belly { fill: #fff; }
-.penguin .cheek { fill: #fff; }
-.penguin .white { fill: #fff; }
-.penguin .pupil { fill: #1a1a1a; }
-.penguin .glint { fill: #fff; }
-.penguin .lid { fill: #1f2433; }
-.penguin .orange { fill: var(--beak); }
-.penguin .blush { fill: #ffb3c1; opacity: .7; }
-.penguin .scarf path { fill: var(--scarf); }
-.penguin .scarf .stripe { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; }
-.penguin .shadow { fill: rgba(31,36,51,.12); }
 .hero-penguin { width: 78%; margin: 0 auto; cursor: pointer; }
 .hero-penguin .bodyg { transform-origin: 100px 220px; transform-box: view-box; }
 .hero-penguin.waddle .bodyg { animation: waddle .9s ease-in-out; }
 @keyframes waddle { 0%,100% { rotate: 0deg; } 20% { rotate: -6deg; } 45% { rotate: 6deg; } 70% { rotate: -4deg; } }
 .flip-l, .flip-r { transform-box: view-box; transition: rotate .25s ease; }
-.flip-l { transform-origin: 46px 106px; } .flip-r { transform-origin: 154px 106px; }
+.flip-l { transform-origin: 44px 120px; } .flip-r { transform-origin: 156px 120px; }
 .penguin.wave .flip-r { animation: wave .9s ease-in-out 2; }
 @keyframes wave { 0%,100% { rotate: 0deg; } 50% { rotate: -55deg; } }
 .hero-penguin { animation: bob 3.2s ease-in-out infinite; }

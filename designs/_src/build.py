@@ -277,12 +277,14 @@ def build_scrapbook():
     html = head("scrapbook", "family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Gochi+Hand", "Scrapbook edition.")
     html += f'''
   <header class="hero" id="hero">
+    <canvas id="julia" aria-hidden="true"></canvas>
+    <div class="hero-veil" aria-hidden="true"></div>
     <div class="table" id="table">
       {pol}
     </div>
     <div class="hero-inner">
       <p class="eyebrow reveal">Portfolio · Fall 2026</p>
-      <h1 class="reveal">{NAME}</h1>
+      <h1 class="reveal"><span class="hero-name">{NAME}{penguin_svg("name-penguin")}</span></h1>
       <p class="hero-sub reveal">{TAGLINE}</p>
       <p class="cta-row reveal"><a class="btn btn-primary" href="resume.pdf" target="_blank" rel="noopener">Résumé</a><a class="btn btn-outline" href="#projects">See Projects</a></p>
       <p class="hand hint reveal">psst, you can move the photos around</p>
@@ -294,7 +296,8 @@ def build_scrapbook():
     html += nav(NAME)
     html += "  <main>"
     html += about("01 — About", '\n          <span class="tape" aria-hidden="true"></span><figcaption class="hand">hi, it’s me</figcaption>')
-    html += experience("02 — Experience", "Where I’ve worked")
+    slider = f'\n          <div class="slider" aria-hidden="true">{penguin_svg("slide-penguin")}</div>'
+    html += experience("02 — Experience", "Where I’ve worked", slider)
     html += f'''
     <section id="projects" class="sec proj-sec">
       <div class="wrap">
@@ -314,21 +317,45 @@ def build_scrapbook():
 
 
 # ───────────────────────── PENGUIN ─────────────────────────
+_peng_n = 0
+
+
 def penguin_svg(cls="", ident=""):
+    # Chubby penguin with a heart-shaped face, Cornell-red scarf and soft shading.
+    # Eye groups keep .white/.pupil/.glint/.lid (penguin.js tracks and blinks them);
+    # the viewBox stays 200 wide because penguin.js maps eye coords with width/200.
+    global _peng_n
+    _peng_n += 1
+    u = f"pg{_peng_n}"
+    eye = lambda x: f'''<g class="eye" data-eye><circle class="white" cx="{x}" cy="78" r="10" fill="none"/><ellipse class="pupil" cx="{x}" cy="78" rx="7" ry="8" fill="#141826"/><circle class="glint" cx="{x + 2.6}" cy="74.6" r="2.6" fill="#fff"/><ellipse class="lid" cx="{x}" cy="78" rx="9" ry="0" fill="#fff"/></g>'''
     return f'''<svg class="penguin {cls}" {ident} viewBox="0 0 200 240" aria-hidden="true">
-        <ellipse class="shadow" cx="100" cy="228" rx="58" ry="8"/>
-        <g class="feet"><path class="orange" d="M70 214c-12 4-16 12-4 12h26c4 0 4-10-2-12z"/><path class="orange" d="M130 214c12 4 16 12 4 12h-26c-4 0-4-10 2-12z"/></g>
+        <defs>
+          <radialGradient id="{u}b" cx=".34" cy=".26" r=".85"><stop offset="0" stop-color="#3a4363"/><stop offset=".55" stop-color="#1f2539"/><stop offset="1" stop-color="#121625"/></radialGradient>
+          <linearGradient id="{u}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf5"/></linearGradient>
+          <linearGradient id="{u}o" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#f08a24"/></linearGradient>
+          <linearGradient id="{u}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d42a2a"/><stop offset="1" stop-color="#a51818"/></linearGradient>
+        </defs>
+        <ellipse class="shadow" cx="100" cy="227" rx="54" ry="7" fill="rgba(20,24,38,.14)"/>
+        <g class="feet" fill="url(#{u}o)"><path d="M62 212c-10 3-14 13-3 14h28c6 0 6-12-3-14z"/><path d="M138 212c10 3 14 13 3 14h-28c-6 0-6-12 3-14z"/></g>
         <g class="bodyg">
-          <g class="flip-l"><path class="ink" d="M44 104c-22 22-30 58-24 74 4 6 12 0 16-8 6-16 10-38 14-56z"/></g>
-          <g class="flip-r"><path class="ink" d="M156 104c22 22 30 58 24 74-4 6-12 0-16-8-6-16-10-38-14-56z"/></g>
-          <path class="ink" d="M100 22c-44 0-62 40-62 92 0 58 22 104 62 104s62-46 62-104c0-52-18-92-62-92z"/>
-          <path class="belly" d="M100 70c-30 0-42 28-42 64 0 44 16 76 42 76s42-32 42-76c0-36-12-64-42-64z"/>
-          <path class="cheek" d="M66 72c6-22 20-30 34-30s28 8 34 30c-10-6-22-6-34 6-12-12-24-12-34-6z"/>
-          <g class="eye" data-eye><circle class="white" cx="80" cy="66" r="11"/><circle class="pupil" cx="80" cy="66" r="5.5"/><circle class="glint" cx="82" cy="63.5" r="1.6"/><ellipse class="lid" cx="80" cy="66" rx="12" ry="0"/></g>
-          <g class="eye" data-eye><circle class="white" cx="120" cy="66" r="11"/><circle class="pupil" cx="120" cy="66" r="5.5"/><circle class="glint" cx="122" cy="63.5" r="1.6"/><ellipse class="lid" cx="120" cy="66" rx="12" ry="0"/></g>
-          <path class="orange" d="M88 82c6-4 18-4 24 0-4 8-8 11-12 11s-8-3-12-11z"/>
-          <ellipse class="blush" cx="68" cy="88" rx="7" ry="4"/><ellipse class="blush" cx="132" cy="88" rx="7" ry="4"/>
-          <g class="scarf"><path d="M50 104c30 14 70 14 100 0l2 14c-32 14-72 14-104 0z"/><path d="M128 112l10 40-16 2-6-36z"/><path class="stripe" d="M128 128l12 -2M130 138l12 -2"/></g>
+          <g class="flip-l"><path fill="#1a1f30" d="M42 118c-20 14-30 44-26 60 3 7 12 4 18-4 8-14 14-36 16-50z"/></g>
+          <g class="flip-r"><path fill="#1a1f30" d="M158 118c20 14 30 44 26 60-3 7-12 4-18-4-8-14-14-36-16-50z"/></g>
+          <path fill="url(#{u}b)" d="M100 16c-46 0-66 44-66 102 0 64 26 102 66 102s66-38 66-102c0-58-20-102-66-102z"/>
+          <path fill="url(#{u}w)" d="M100 98c-32 0-46 30-46 62 0 36 18 54 46 54s46-18 46-54c0-32-14-62-46-62z"/>
+          <path fill="url(#{u}w)" d="M100 58c-10-18-44-20-46 12-2 28 20 42 46 42s48-14 46-42c-2-32-36-30-46-12z"/>
+          <ellipse cx="72" cy="34" rx="16" ry="7" fill="#fff" opacity=".13" transform="rotate(-28 72 34)"/>
+          <path d="M98 17c-4-8 1-14 7-15-3 4-2 9 2 13" fill="none" stroke="#1f2539" stroke-width="3" stroke-linecap="round"/>
+          {eye(82)}
+          {eye(118)}
+          <ellipse class="blush" cx="68" cy="95" rx="8" ry="4.5" fill="#ff9fb2" opacity=".6"/><ellipse class="blush" cx="132" cy="95" rx="8" ry="4.5" fill="#ff9fb2" opacity=".6"/>
+          <path fill="url(#{u}o)" d="M90 90c5-4 15-4 20 0-2 7-6 11-10 11s-8-4-10-11z"/>
+          <path d="M92 93c4 2 12 2 16 0" fill="none" stroke="#c96a12" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+          <g class="scarf">
+            <path fill="url(#{u}s)" d="M46 114c34 16 74 16 108 0l3 13c-36 18-78 18-114 0z"/>
+            <path fill="url(#{u}s)" d="M122 128l14 38-15 4-9-38z"/>
+            <path d="M58 122c28 10 56 10 84 0M126 144l12-3M129 154l12-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".85"/>
+            <path d="M122 170l-2 6M127 169l-1 6M132 168l0 6" stroke="#a51818" stroke-width="2" stroke-linecap="round"/>
+          </g>
         </g>
       </svg>'''
 
@@ -397,5 +424,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 base_css, base_js = open(f"{HERE}/base.css").read(), open(f"{HERE}/base.js").read()
 for v in ("fractal", "scrapbook", "penguin"):
     open(f"{OUT}/{v}/style.css", "w").write(base_css + "\n" + open(f"{HERE}/{v}.css").read())
-    open(f"{OUT}/{v}/app.js", "w").write(base_js + "\n" + open(f"{HERE}/{v}.js").read())
+    theme_js = open(f"{HERE}/{v}.js").read()
+    if v == "scrapbook":
+        theme_js += "\n" + open(f"{HERE}/fractal.js").read()
+        theme_js += "\n" + open(f"{HERE}/penguin.js").read()
+    open(f"{OUT}/{v}/app.js", "w").write(base_js + "\n" + theme_js)
 print("built")

@@ -15,6 +15,8 @@
   <a class="skip" href="#about">Skip to content</a>
 
   <header class="hero" id="hero">
+    <canvas id="julia" aria-hidden="true"></canvas>
+    <div class="hero-veil" aria-hidden="true"></div>
     <div class="table" id="table">
       <figure class="polaroid drop" style="--x:6%;--y:16%;--r:-8deg;--d:0.20s">
         <span class="tape" aria-hidden="true"></span>
@@ -49,7 +51,36 @@
     </div>
     <div class="hero-inner">
       <p class="eyebrow reveal">Portfolio · Fall 2026</p>
-      <h1 class="reveal">Ashee B Bansaal</h1>
+      <h1 class="reveal"><span class="hero-name">Ashee B Bansaal<svg class="penguin name-penguin"  viewBox="0 0 200 240" aria-hidden="true">
+        <defs>
+          <radialGradient id="pg1b" cx=".34" cy=".26" r=".85"><stop offset="0" stop-color="#3a4363"/><stop offset=".55" stop-color="#1f2539"/><stop offset="1" stop-color="#121625"/></radialGradient>
+          <linearGradient id="pg1w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf5"/></linearGradient>
+          <linearGradient id="pg1o" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#f08a24"/></linearGradient>
+          <linearGradient id="pg1s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d42a2a"/><stop offset="1" stop-color="#a51818"/></linearGradient>
+        </defs>
+        <ellipse class="shadow" cx="100" cy="227" rx="54" ry="7" fill="rgba(20,24,38,.14)"/>
+        <g class="feet" fill="url(#pg1o)"><path d="M62 212c-10 3-14 13-3 14h28c6 0 6-12-3-14z"/><path d="M138 212c10 3 14 13 3 14h-28c-6 0-6-12 3-14z"/></g>
+        <g class="bodyg">
+          <g class="flip-l"><path fill="#1a1f30" d="M42 118c-20 14-30 44-26 60 3 7 12 4 18-4 8-14 14-36 16-50z"/></g>
+          <g class="flip-r"><path fill="#1a1f30" d="M158 118c20 14 30 44 26 60-3 7-12 4-18-4-8-14-14-36-16-50z"/></g>
+          <path fill="url(#pg1b)" d="M100 16c-46 0-66 44-66 102 0 64 26 102 66 102s66-38 66-102c0-58-20-102-66-102z"/>
+          <path fill="url(#pg1w)" d="M100 98c-32 0-46 30-46 62 0 36 18 54 46 54s46-18 46-54c0-32-14-62-46-62z"/>
+          <path fill="url(#pg1w)" d="M100 58c-10-18-44-20-46 12-2 28 20 42 46 42s48-14 46-42c-2-32-36-30-46-12z"/>
+          <ellipse cx="72" cy="34" rx="16" ry="7" fill="#fff" opacity=".13" transform="rotate(-28 72 34)"/>
+          <path d="M98 17c-4-8 1-14 7-15-3 4-2 9 2 13" fill="none" stroke="#1f2539" stroke-width="3" stroke-linecap="round"/>
+          <g class="eye" data-eye><circle class="white" cx="82" cy="78" r="10" fill="none"/><ellipse class="pupil" cx="82" cy="78" rx="7" ry="8" fill="#141826"/><circle class="glint" cx="84.6" cy="74.6" r="2.6" fill="#fff"/><ellipse class="lid" cx="82" cy="78" rx="9" ry="0" fill="#fff"/></g>
+          <g class="eye" data-eye><circle class="white" cx="118" cy="78" r="10" fill="none"/><ellipse class="pupil" cx="118" cy="78" rx="7" ry="8" fill="#141826"/><circle class="glint" cx="120.6" cy="74.6" r="2.6" fill="#fff"/><ellipse class="lid" cx="118" cy="78" rx="9" ry="0" fill="#fff"/></g>
+          <ellipse class="blush" cx="68" cy="95" rx="8" ry="4.5" fill="#ff9fb2" opacity=".6"/><ellipse class="blush" cx="132" cy="95" rx="8" ry="4.5" fill="#ff9fb2" opacity=".6"/>
+          <path fill="url(#pg1o)" d="M90 90c5-4 15-4 20 0-2 7-6 11-10 11s-8-4-10-11z"/>
+          <path d="M92 93c4 2 12 2 16 0" fill="none" stroke="#c96a12" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+          <g class="scarf">
+            <path fill="url(#pg1s)" d="M46 114c34 16 74 16 108 0l3 13c-36 18-78 18-114 0z"/>
+            <path fill="url(#pg1s)" d="M122 128l14 38-15 4-9-38z"/>
+            <path d="M58 122c28 10 56 10 84 0M126 144l12-3M129 154l12-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".85"/>
+            <path d="M122 170l-2 6M127 169l-1 6M132 168l0 6" stroke="#a51818" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg></span></h1>
       <p class="hero-sub reveal">Software &amp; ML Engineering · CS @ Cornell</p>
       <p class="cta-row reveal"><a class="btn btn-primary" href="resume.pdf" target="_blank" rel="noopener">Résumé</a><a class="btn btn-outline" href="#projects">See Projects</a></p>
       <p class="hand hint reveal">psst, you can move the photos around</p>
@@ -99,6 +130,36 @@
         <p class="epigraph">“[another line from your poetry book]”</p>
       </header>
         <div class="tl-wrap">
+          <div class="slider" aria-hidden="true"><svg class="penguin slide-penguin"  viewBox="0 0 200 240" aria-hidden="true">
+        <defs>
+          <radialGradient id="pg2b" cx=".34" cy=".26" r=".85"><stop offset="0" stop-color="#3a4363"/><stop offset=".55" stop-color="#1f2539"/><stop offset="1" stop-color="#121625"/></radialGradient>
+          <linearGradient id="pg2w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf5"/></linearGradient>
+          <linearGradient id="pg2o" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#f08a24"/></linearGradient>
+          <linearGradient id="pg2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d42a2a"/><stop offset="1" stop-color="#a51818"/></linearGradient>
+        </defs>
+        <ellipse class="shadow" cx="100" cy="227" rx="54" ry="7" fill="rgba(20,24,38,.14)"/>
+        <g class="feet" fill="url(#pg2o)"><path d="M62 212c-10 3-14 13-3 14h28c6 0 6-12-3-14z"/><path d="M138 212c10 3 14 13 3 14h-28c-6 0-6-12 3-14z"/></g>
+        <g class="bodyg">
+          <g class="flip-l"><path fill="#1a1f30" d="M42 118c-20 14-30 44-26 60 3 7 12 4 18-4 8-14 14-36 16-50z"/></g>
+          <g class="flip-r"><path fill="#1a1f30" d="M158 118c20 14 30 44 26 60-3 7-12 4-18-4-8-14-14-36-16-50z"/></g>
+          <path fill="url(#pg2b)" d="M100 16c-46 0-66 44-66 102 0 64 26 102 66 102s66-38 66-102c0-58-20-102-66-102z"/>
+          <path fill="url(#pg2w)" d="M100 98c-32 0-46 30-46 62 0 36 18 54 46 54s46-18 46-54c0-32-14-62-46-62z"/>
+          <path fill="url(#pg2w)" d="M100 58c-10-18-44-20-46 12-2 28 20 42 46 42s48-14 46-42c-2-32-36-30-46-12z"/>
+          <ellipse cx="72" cy="34" rx="16" ry="7" fill="#fff" opacity=".13" transform="rotate(-28 72 34)"/>
+          <path d="M98 17c-4-8 1-14 7-15-3 4-2 9 2 13" fill="none" stroke="#1f2539" stroke-width="3" stroke-linecap="round"/>
+          <g class="eye" data-eye><circle class="white" cx="82" cy="78" r="10" fill="none"/><ellipse class="pupil" cx="82" cy="78" rx="7" ry="8" fill="#141826"/><circle class="glint" cx="84.6" cy="74.6" r="2.6" fill="#fff"/><ellipse class="lid" cx="82" cy="78" rx="9" ry="0" fill="#fff"/></g>
+          <g class="eye" data-eye><circle class="white" cx="118" cy="78" r="10" fill="none"/><ellipse class="pupil" cx="118" cy="78" rx="7" ry="8" fill="#141826"/><circle class="glint" cx="120.6" cy="74.6" r="2.6" fill="#fff"/><ellipse class="lid" cx="118" cy="78" rx="9" ry="0" fill="#fff"/></g>
+          <ellipse class="blush" cx="68" cy="95" rx="8" ry="4.5" fill="#ff9fb2" opacity=".6"/><ellipse class="blush" cx="132" cy="95" rx="8" ry="4.5" fill="#ff9fb2" opacity=".6"/>
+          <path fill="url(#pg2o)" d="M90 90c5-4 15-4 20 0-2 7-6 11-10 11s-8-4-10-11z"/>
+          <path d="M92 93c4 2 12 2 16 0" fill="none" stroke="#c96a12" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+          <g class="scarf">
+            <path fill="url(#pg2s)" d="M46 114c34 16 74 16 108 0l3 13c-36 18-78 18-114 0z"/>
+            <path fill="url(#pg2s)" d="M122 128l14 38-15 4-9-38z"/>
+            <path d="M58 122c28 10 56 10 84 0M126 144l12-3M129 154l12-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".85"/>
+            <path d="M122 170l-2 6M127 169l-1 6M132 168l0 6" stroke="#a51818" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg></div>
         <ol class="timeline">
           <li class="t-item">
             <article class="card exp-card">
