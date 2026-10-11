@@ -19,9 +19,22 @@ for _p in PROJECTS:
     _p.setdefault("id", re.sub(r"[^a-z0-9]+", "-", _p["name"].lower()).strip("-"))
 
 
+def bust(html):
+    # add ?v=<content hash> to local files so browsers never show a stale copy after an update
+    import hashlib
+    def stamp(m):
+        f = os.path.join(ROOT, m.group(2))
+        if not os.path.isfile(f):
+            return m.group(0)
+        v = hashlib.md5(open(f, "rb").read()).hexdigest()[:8]
+        return f'{m.group(1)}="{m.group(2)}?v={v}"'
+    return re.sub(r'(src|href)="((?:photos|logos)/[^"?]+|style\.css|app\.js|favicon\.svg|favicon\.png|apple-touch-icon\.png|resume\.pdf)"', stamp, html)
+
+
 def save(path, html):
     # lets content.py use a bare "&" (e.g. "R&D") without breaking the HTML
     html = re.sub(r"&(?![a-zA-Z]+;|#\d+;|#x[0-9a-fA-F]+;)", "&amp;", html)
+    html = bust(html)
     open(path, "w").write(html)
 
 SOCIAL = f'''<ul class="nav-icons">
@@ -346,6 +359,6 @@ if "--watch" in sys.argv:
             last = now
         time.sleep(0.7)
 
+build_assets()  # first, so the page can stamp style.css / app.js with their new hashes
 build_page()
-build_assets()
 print("built")

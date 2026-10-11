@@ -77,17 +77,6 @@
     });
     bar.append(file);
     btn('Image', 'Upload a screenshot or photo', () => file.click());
-    const art = card.querySelector('.card-art');
-    const fitBtn = btn('', 'Show the whole image, or fill the box', () => {
-      const next = card.dataset.fit === 'cover' ? 'contain' : 'cover';
-      card.dataset.fit = next;
-      art?.classList.toggle('is-cover', next === 'cover');
-      const img = art?.querySelector('img'); if (img) img.style.objectFit = next;
-      fitBtn.textContent = next === 'cover' ? 'Fill' : 'Fit';
-      track(`PROJECTS.${i}.fit`, next, fitBtn.dataset.orig, fitBtn);
-    });
-    fitBtn.dataset.orig = card.dataset.fit;
-    fitBtn.textContent = card.dataset.fit === 'cover' ? 'Fill' : 'Fit';
     bar.append(linkButton(`PROJECTS.${i}.link`, () => card.dataset.link, (u) => { card.dataset.link = u; }));
     btn('Copy', 'Duplicate this project', () => save([{ op: 'duplicate', i }]));
     const del = btn('Delete', 'Delete this project', () => {
