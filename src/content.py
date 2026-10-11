@@ -35,10 +35,7 @@ TITLES = {
 }
 
 # Lines from your own poems, used as small epigraphs. Replace these.
-EPIGRAPHS = {
-    "about": "[a line from one of your poems]",
-    "projects": "",
-    "hobbies": "[a line from your book]",
+EPIGRAPHS = {  # add a line from your poems here to show it under that section's heading, e.g. "hobbies": "…"
 }
 
 EXPERIENCE = [
