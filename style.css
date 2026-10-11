@@ -270,7 +270,7 @@ body.no-webgl .hero { background: var(--bg); }
   background: color-mix(in srgb, var(--lilac) 80%, transparent); }
 .pcard:nth-child(3n+2)::before { background: color-mix(in srgb, var(--mint) 85%, transparent); rotate: 2deg; }
 .pcard:nth-child(3n)::before { background: color-mix(in srgb, var(--coral) 85%, transparent); rotate: -1deg; }
-.pcard:hover { border-color: #b9b9b9; box-shadow: 0 0 0 1px #b9b9b9, 0 4px 20px rgba(0,0,0,.08); }
+.pcard:hover { border-color: #1a1a1a; box-shadow: 0 0 0 1px #1a1a1a, 0 6px 16px rgba(0,0,0,.10), 0 14px 32px rgba(0,0,0,.08); }
 /* no movement inside the masonry columns: Chrome repaints neighbouring cards when one moves, which flickers */
 .pgrid .pcard, .pgrid .pcard.pre { transform: none !important; }
 .pgrid .pcard.pre { transition: opacity .6s ease, box-shadow .25s ease, border-color .25s ease; }
