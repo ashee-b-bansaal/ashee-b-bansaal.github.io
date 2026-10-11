@@ -137,7 +137,7 @@ PROJECTS = [
         name="Cornell XR · BCI",
         subtitle="Live EEG inference for extended reality",
         link="#",
-        image="photos/xr.jpg",
+        image="photos/cuxr-bci.jpg",
         fit="cover", focus="50% 22%",
         text="Our sub-team streams EEG at 256 Hz into a real-time inference pipeline built on FFT spectral features (82% accuracy across 20+ users), so XR experiences can respond to the person wearing the headset. I lead six engineers and set up our CI, code review, and sprint process, which cut integration bugs by 40%.",
         details=[("Built With", "Python, FFT features, Streaming"), ("Team", "Sub-team lead · 6 engineers")],
@@ -157,11 +157,12 @@ PROJECTS = [
         name="AirDrum Duel",
         subtitle="Real-Time Embedded Rhythm Game",
         link="https://pages.github.coecis.cornell.edu/ece3140-spr2026/ab3235-svo8/",
-        image="",
-        fit="contain",
+        image="photos/airdrum-duel.jpg",
+        fit="cover",
         text="A two-player rhythm game that turns mid-air gestures into virtual drum beats using motion-sensing microcontrollers. Built a 6-stage concurrent embedded pipeline with IMU gesture classification, earliest-deadline-first scheduling, and 10 ms sensor sampling for responsive gameplay.",
         details=[("Tech Stack", "Embedded C, FRDM-KL46Z, IMU Sensors, RT Scheduling (EDF), UART, Hardware Timers, Concurrent Programming")],
         buttons=[("Demo Video", "https://youtu.be/6LhgXgnIcNo"), ("GitHub", "https://pages.github.coecis.cornell.edu/ece3140-spr2026/ab3235-svo8/")],
+        focus="0% 0%",
     ),
 ]
 
