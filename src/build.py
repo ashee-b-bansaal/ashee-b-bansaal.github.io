@@ -110,11 +110,12 @@ def experience(num, title, extra_inside_timeline="", title_key=None):
     for i, e in enumerate(EXPERIENCE):
         k = f"EXPERIENCE.{i}"
         tags = "".join(f'<li data-edit="{k}.tags.{j}">{t}</li>' for j, t in enumerate(e["tags"]))
+        venue = f'<p class="venue" data-edit="{k}.venue">{e["venue"]}</p>' if e.get("venue") else ""
         items.append(f'''          <li class="t-item{' is-now' if e['now'] else ''}">
             <article class="card exp-card">
               <header class="card-head">
                 {logo(e, k)}
-                <div><h3 data-edit="{k}.role">{e['role']}</h3><p class="org" data-edit="{k}.org">{e['org']}</p></div>
+                <div><h3 data-edit="{k}.role">{e['role']}</h3><p class="org" data-edit="{k}.org">{e['org']}</p>{venue}</div>
               </header>
               <p class="when"><span data-edit="{k}.when">{e['when']}</span> <span data-edit="{k}.where">{e['where']}</span></p>
               <p data-edit="{k}.text">{e['text']}</p>
@@ -214,14 +215,17 @@ def build_page():
         if link and link != "#":  # "#" = placeholder, not clickable yet
             title = f'<a href="{link}" target="_blank" rel="noopener" data-edit-href="{k}.link">{title}<span class="go" aria-hidden="true">↗</span></a>'
             art = f'<a class="art-link" href="{link}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{art}</a>'
+        tags = "".join(f'<li data-edit="{k}.tags.{j}">{t}</li>' for j, t in enumerate(p.get("tags", [])))
         newtab = lambda u: "" if u == "#" else ' target="_blank" rel="noopener"'
         details = "".join(f'<p class="detail"><span data-edit="{k}.details.{j}.0">{a}</span>: <b data-edit="{k}.details.{j}.1">{b}</b></p>' for j, (a, b) in enumerate(p.get("details", [])))
         buttons = "".join(f'<a class="link-pill" href="{u}"{newtab(u)} data-edit-href="{k}.buttons.{j}.1"><span data-edit="{k}.buttons.{j}.0">{l}</span> <span aria-hidden="true">↗</span></a>' for j, (l, u) in enumerate(p.get("buttons", [])))
         return f'''          <article class="pcard" id="{p['id']}" data-project="{i}" data-link="{link}" data-fit="{fit}">
             <h3>{title}</h3>
             <p class="sub{empty(p.get('subtitle'))}" data-edit="{k}.subtitle">{p.get('subtitle', '')}</p>
+            <p class="venue{empty(p.get('venue'))}" data-edit="{k}.venue">{p.get('venue', '')}</p>
             {art}
             <p class="desc" data-edit="{k}.text">{p['text']}</p>
+            <ul class="tags ptags">{tags}</ul>
             <div class="details">{details}</div>
             {f'<div class="proj-links">{buttons}</div>' if buttons else ''}
           </article>'''
@@ -234,7 +238,6 @@ def build_page():
             <span class="hob-icon" aria-hidden="true">{ICONS[h['icon']]}</span>
             <h3 data-edit="{k}.title">{h['title']}</h3>
             <p data-edit="{k}.text">{h['text']}</p>{link}
-            <span class="stub" aria-hidden="true">ADMIT ONE · {h['title'].upper()}</span>
           </article>'''
 
     marquee_items = ["SWE", "ML", "Cornell ’28", "poet", "flautist", "keys", "always carrying a camera", "Ithaca, NY", "open to Summer 2027"]

@@ -27,12 +27,14 @@ EDITABLE = {"NAME", "TAGLINE", "ABOUT_HEAD", "ABOUT", "SEEKING", "EPIGRAPHS", "T
             "EXPERIENCE", "PROJECTS", "HOBBIES", "SKILLS", "EDU"}
 NEW_PROJECT = '''dict(
         name="New project",
+        venue="",
         subtitle="One line about it",
         link="#",
         image="",
         fit="contain",
         text="What it is, what you built, and the result.",
-        details=[("Tech Stack", "Python, React")],
+        tags=["Python", "React"],
+        details=[],
         buttons=[("GitHub", "#")],
     )'''
 
