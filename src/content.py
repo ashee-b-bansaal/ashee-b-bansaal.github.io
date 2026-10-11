@@ -47,7 +47,7 @@ EXPERIENCE = [
          when="Aug 2025 – Present", where="Ithaca, NY", now=True,
          text="Building a hands-free brain-computer interface powered by EEG signals. Developed Conv-LSTM attention models achieving 93% classification accuracy and reduced model iteration time from 5 to 2 days.",
          tags=["Python", "PyTorch", "EEGNet", "Conv-LSTM", "Docker", "Kubernetes", "Optuna"]),
-    dict(logo="Sci-Fi", logo_img="logos/cornell.svg", role="Machine Learning Intern", org="Cornell University · Sci-Fi Lab",
+    dict(logo="Sci-Fi", logo_img="logos/cornell.svg", venue="Submitted to CHI’27 (FaceSign)", role="Machine Learning Intern", org="Cornell University · Sci-Fi Lab",
          when="Jun 2025 – Aug 2025", where="Ithaca, NY", now=False,
          text="Developed multimodal deep learning models for wearable gesture recognition. Trained Conformer-CTC models on 6,000+ sequences, achieving 98.9% gesture accuracy.",
          tags=["Python", "PyTorch", "Conformer-CTC", "Multimodal Learning", "Acoustic Sensing", "IMU"]),
