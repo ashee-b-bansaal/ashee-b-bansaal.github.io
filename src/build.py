@@ -56,6 +56,7 @@ def head(title_suffix, fonts, desc, theme="#ffffff"):
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?{fonts}&display=swap" rel="stylesheet">
   <meta name="theme-color" content="{theme}">
+  <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -185,7 +186,7 @@ def foot(extra_top="", extra_bottom=""):
   <footer class="foot">
     <div class="wrap">{extra_top}
       <p class="cta"><em>Say hello</em>: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
-      <p class="small"><span>Hand-written HTML, CSS &amp; JS · Last updated October 2026</span><span>It’s <span class="clock">--:--</span> in Ithaca</span></p>
+      <p class="small"><span>It’s <span class="clock">--:--</span> in Ithaca</span></p>
     </div>{extra_bottom}
   </footer>
   <script src="app.js" defer></script>
