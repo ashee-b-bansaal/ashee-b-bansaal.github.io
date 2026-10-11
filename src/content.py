@@ -195,11 +195,11 @@ HOBBIES = [
          text="I take a lot of photos. A few of them ended up on this site.", link=None, tint="sky"),
 ]
 
-SKILLS = [
-    ("Languages", "Python, Java, Kotlin, C/C++, Go, TypeScript, JavaScript, SQL, Swift, Rust, Bash"),
-    ("Backend &amp; Data", "REST, gRPC, FastAPI, Flask, PostgreSQL, SQLite, Redis, Neo4j, BigQuery, Firebase"),
-    ("ML", "PyTorch, TensorFlow / TFLite, CUDA, FAISS, Pinecone, Optuna"),
-    ("Infra &amp; Tools", "AWS, GCP, Docker, Kubernetes, GitHub Actions, Linux, Git"),
+SKILLS = [  # (group name, [skills]); each skill shows as a chip
+    ("Languages", ["Python", "C/C++", "Go", "Java", "Kotlin", "JavaScript", "TypeScript", "Swift", "SQL", "Rust", "Solidity", "Bash", "R", "MATLAB"]),
+    ("AI / ML", ["PyTorch", "TensorFlow", "CUDA", "NVIDIA Triton", "scikit-learn", "Keras", "Hugging Face", "LangChain", "LangGraph", "OpenCV"]),
+    ("Systems & Web", ["React", "Node.js", "FastAPI", "REST", "gRPC", "PostgreSQL", "SQLite", "Redis", "Neo4j", "BigQuery", "Firebase"]),
+    ("Infra & Tools", ["AWS", "GCP", "Docker", "Kubernetes", "Linux", "Git", "CI/CD", "ROS", "Pytest", "Claude Code", "Cursor"]),
 ]
 EDU = "<em>Cornell University</em>, B.S. Computer Science (Honors) · Minor in ECE · GPA 3.85 · May 2028"
 

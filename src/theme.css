@@ -154,18 +154,27 @@ body.no-webgl .hero { background: var(--bg); }
 .pcard .link-pill:hover { background: #fff; color: #000; }
 
 /* hobbies: tilted cards */
-.hob-sec .hob-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hob-sec .hob-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 980px; margin: 0 auto; }
+.hob-sec .hob { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.hob-sec .hob-icon svg { margin: 0 auto 18px; }
+.hob-sec .hob .link-pill { margin-top: auto; }
 @media (max-width: 900px) { .hob-sec .hob-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
 .ticket { position: relative; border: none; border-radius: 14px; }
 .ticket h3 { font-size: 26px; font-weight: 500; }
 .ticket p { color: #222; }
 .ticket .link-pill { background: rgba(255,255,255,.7); }
-.ticket:nth-child(odd) { rotate: -1.2deg; } .ticket:nth-child(even) { rotate: 1deg; }
+.ticket:nth-child(1) { rotate: -1deg; } .ticket:nth-child(3) { rotate: 1deg; }
 .ticket:hover { rotate: 0deg; transform: translateY(-4px); }
 
-/* skills as label stickers */
-.skills { border-top: 1px solid #000; }
-.skills h3 { font-weight: 600; }
+/* skills: tinted cards of chips */
+.skills { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; border-top: none; padding-top: 0; max-width: 1040px; margin: 0 auto; }
+.skill-card { border-radius: 18px; padding: 26px 26px 28px; }
+.skill-card h3 { font: 600 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; color: rgba(0,0,0,.7); }
+.skill-card .tags { gap: 8px; }
+.skill-card .tags li { background: rgba(255,255,255,.72); color: #000; font-size: 13.5px; padding: 8px 13px; box-shadow: 0 1px 0 rgba(0,0,0,.05); transition: background-color .15s, transform .15s; }
+.skill-card .tags li:hover { background: #fff; transform: translateY(-1px); }
+@media (max-width: 680px) { .skills { grid-template-columns: 1fr; } }
+.edu { display: table; margin: 40px auto 0; padding: 12px 20px; border: 1px solid var(--hair-strong); border-radius: 999px; font-size: 15px; }
 .edu em { font-style: normal; font-weight: 600; }
 
 /* footer */

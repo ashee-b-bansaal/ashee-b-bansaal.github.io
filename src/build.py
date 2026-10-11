@@ -164,7 +164,11 @@ def hobbies(num, title, render, title_key=None):
 
 
 def skills(num):
-    cols = "".join(f'<div><h3 data-edit="SKILLS.{i}.0">{a}</h3><p data-edit="SKILLS.{i}.1">{b}</p></div>' for i, (a, b) in enumerate(SKILLS))
+    tints = ["lilac", "mint", "coral", "lime"]
+    chips = lambda i, items: "".join(f'<li data-edit="SKILLS.{i}.1.{j}">{t}</li>' for j, t in enumerate(items))
+    cols = "".join(
+        f'<div class="skill-card tint-{tints[i % len(tints)]}"><h3 data-edit="SKILLS.{i}.0">{name}</h3><ul class="tags">{chips(i, items)}</ul></div>'
+        for i, (name, items) in enumerate(SKILLS))
     return f'''
     <section id="skills" class="sec skills-sec">
       <div class="wrap">
