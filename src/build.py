@@ -208,11 +208,12 @@ def build_page():
                else f'<span class="hand">{name.lower()}</span>')
         art = f'<div class="card-art tint-{tints[i % len(tints)]}{" is-cover" if img and fit == "cover" else ""}">{art}</div>'
         title = f'<span data-edit="{k}.name">{p["name"]}</span>'
-        if link:
+        if link and link != "#":  # "#" = placeholder, not clickable yet
             title = f'<a href="{link}" target="_blank" rel="noopener" data-edit-href="{k}.link">{title}<span class="go" aria-hidden="true">↗</span></a>'
             art = f'<a class="art-link" href="{link}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{art}</a>'
+        newtab = lambda u: "" if u == "#" else ' target="_blank" rel="noopener"'
         details = "".join(f'<p class="detail"><span data-edit="{k}.details.{j}.0">{a}</span>: <b data-edit="{k}.details.{j}.1">{b}</b></p>' for j, (a, b) in enumerate(p.get("details", [])))
-        buttons = "".join(f'<a class="link-pill" href="{u}" target="_blank" rel="noopener" data-edit-href="{k}.buttons.{j}.1"><span data-edit="{k}.buttons.{j}.0">{l}</span> <span aria-hidden="true">↗</span></a>' for j, (l, u) in enumerate(p.get("buttons", [])))
+        buttons = "".join(f'<a class="link-pill" href="{u}"{newtab(u)} data-edit-href="{k}.buttons.{j}.1"><span data-edit="{k}.buttons.{j}.0">{l}</span> <span aria-hidden="true">↗</span></a>' for j, (l, u) in enumerate(p.get("buttons", [])))
         return f'''          <article class="pcard" id="{p['id']}" data-project="{i}" data-link="{link}" data-fit="{fit}">
             <h3>{title}</h3>
             <p class="sub{empty(p.get('subtitle'))}" data-edit="{k}.subtitle">{p.get('subtitle', '')}</p>

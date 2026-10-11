@@ -87,7 +87,7 @@ PROJECTS = [
         fit="cover", focus="75% 62%",
         text="An AR interface enabling real-time communication between Deaf, hard-of-hearing, and hearing users. Built a 7-task asynchronous AI pipeline with sub-second latency and 95%+ gesture recognition accuracy.",
         details=[("Tech Stack", "Python, Asyncio, TensorFlow Lite, MediaPipe, Whisper, GPT-4o-mini, Azure TTS")],
-        buttons=[("GitHub", "https://github.com/ashee-b-bansaal/Select-or-Sign-AI-powered-AR-glass-interface-.git"), ("Poster", "https://kommodo.ai/i/Eizf5MxEyp84yT3jUXCc"), ("Demo Video", "https://youtu.be/lZsJfs5ApfI?si=pSJ_sRxYps5A_zno")],
+        buttons=[("GitHub", "https://github.com/ashee-b-bansaal/Select-or-Sign-AI-powered-AR-glass-interface-.git"), ("Poster", "https://yourimageshare.com/ib/TU3qqC6SM9.png"), ("Demo Video", "https://youtu.be/lZsJfs5ApfI?si=pSJ_sRxYps5A_zno")],
     ),
     dict(
         name="I Can’t Tell Anyone",
@@ -112,12 +112,12 @@ PROJECTS = [
     dict(
         name="FaceSign",
         subtitle="Multimodal AR Sign Language Recognition",
-        link="#",
+        link="https://kommodo.ai/i/aLtOEzaXE31cF5kimyjV",
         image="",
         fit="contain",
         text="A smart-glasses system that recognizes sign language gestures and facial expressions. Developed a multimodal Conformer-CTC model combining acoustic and motion sensors, achieving 98.9% gesture accuracy and 97.4% facial-expression F1.",
         details=[("Tech Stack", "Python, PyTorch, Conformer-CTC, CNNs, Multitask Learning, Acoustic Sensing, IMU")],
-        buttons=[("Demo Video", "https://youtu.be/iAjPd3CNK30")],
+        buttons=[("Demo Video", "https://youtu.be/iAjPd3CNK30"), ("Concept", "https://yourimageshare.com/ib/ulscpG3rD8.png")],
     ),
     dict(
         name="Legal Eagle",
@@ -127,7 +127,7 @@ PROJECTS = [
         fit="contain",
         text="An AI platform that transforms complex legal documents into conversational podcasts. Built a multi-agent RAG pipeline that reduced hallucinations by 35% and LLM token costs by 98.5%.",
         details=[("Tech Stack", "Python, LangGraph, Pinecone, RAG, LLMs, Redis, JavaScript, HTML/CSS"), ("Team", "Co-built with another developer")],
-        buttons=[("Demo Video", "#")],
+        buttons=[("Demo Video", "https://youtu.be/ReSZEn3ARvg")],
     ),
     dict(
         name="Cornell XR · BCI",
@@ -148,6 +148,16 @@ PROJECTS = [
         text="A web platform that visualizes personalized learning paths as interactive knowledge graphs. Built React/D3.js visualizations and vector-search services supporting 100+ adaptive learning nodes.",
         details=[("Tech Stack", "React, TypeScript, D3.js, Python, Node.js, FAISS, Pinecone, Neo4j")],
         buttons=[("GitHub", "#")],
+    ),
+    dict(
+        name="AirDrum Duel",
+        subtitle="Real-Time Embedded Rhythm Game",
+        link="https://pages.github.coecis.cornell.edu/ece3140-spr2026/ab3235-svo8/",
+        image="",
+        fit="contain",
+        text="A two-player rhythm game that turns mid-air gestures into virtual drum beats using motion-sensing microcontrollers. Built a 6-stage concurrent embedded pipeline with IMU gesture classification, earliest-deadline-first scheduling, and 10 ms sensor sampling for responsive gameplay.",
+        details=[("Tech Stack", "Embedded C, FRDM-KL46Z, IMU Sensors, RT Scheduling (EDF), UART, Hardware Timers, Concurrent Programming")],
+        buttons=[("Demo Video", "https://youtu.be/6LhgXgnIcNo"), ("GitHub", "https://pages.github.coecis.cornell.edu/ece3140-spr2026/ab3235-svo8/")],
     ),
 ]
 
