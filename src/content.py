@@ -143,7 +143,7 @@ PROJECTS = [
         focus="50% 50%",
     ),
     dict(
-        name="Cornell XR · BCI",
+        name="VR-BCI Navigation (CUXR)",
         venue="",
         subtitle="Live EEG inference for extended reality",
         link="#",
