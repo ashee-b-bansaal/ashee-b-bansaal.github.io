@@ -290,7 +290,6 @@ def build_page():
         <div class="pgrid">
 {cards}
         </div>
-        <p class="more">More on <a href="{GITHUB}">GitHub</a>.</p>
       </div>
     </section>
 '''
