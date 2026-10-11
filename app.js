@@ -1,4 +1,4 @@
-// ── shared behaviour (all three designs) ──
+// ── shared behaviour: nav highlight, scroll fade-in, clock ──
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Highlight the nav link for the section on screen.
@@ -17,7 +17,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Fade things up as they scroll into view.
 (() => {
-  const els = document.querySelectorAll('.card, .proj, .page, .hob, .sec-head, .skills, .about-text');
+  const els = document.querySelectorAll('.card, .proj, .page, .pcard, .hob, .sec-head, .skills, .about-text');
   if (REDUCED || !('IntersectionObserver' in window)) return;
   els.forEach((el) => el.classList.add('pre'));
   const io = new IntersectionObserver((entries) => {
@@ -33,8 +33,6 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const tick = () => { const t = fmt.format(new Date()).toLowerCase(); els.forEach((e) => { e.textContent = t; }); };
   tick(); setInterval(tick, 20000);
 })();
-
-// ── SCRAPBOOK edition ──
 
 // Polaroids on the hero "table": drag them anywhere, and they lean
 // gently toward the cursor while you move around.
@@ -80,7 +78,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-// ── FRACTAL edition ──
+// The hero background: a live Julia set.
 
 // Hero: a Julia set rendered on the GPU. The cursor steers c, so moving
 // the mouse anywhere reshapes the fractal; when idle, c drifts on its own.
@@ -172,155 +170,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (REDUCED) hero.addEventListener('pointermove', () => requestAnimationFrame(frame));
 })();
 
-// Project cards: each draws its own classic fractal when it scrolls into view.
-(() => {
-  const ink = 'rgba(12,10,9,0.72)';
-  const draw = {
-    dragon(ctx, w, h, steps) {
-      // Heighway dragon via turn sequence
-      const n = 12, total = 2 ** n;
-      let x = w * 0.76, y = h * 0.36, dir = 0, len = Math.min(w, h) / 92;
-      ctx.beginPath(); ctx.moveTo(x, y);
-      for (let i = 1; i <= Math.min(total, steps); i++) {
-        const turn = (((i & -i) << 1) & i) !== 0 ? -1 : 1;
-        x += Math.cos(dir * Math.PI / 2) * len; y += Math.sin(dir * Math.PI / 2) * len;
-        ctx.lineTo(x, y);
-        dir = (dir + turn + 4) % 4;
-      }
-      ctx.stroke();
-      return total;
-    },
-    sierpinski(ctx, w, h, steps) {
-      const s = Math.min(w, h) * 0.8, cx = w / 2, top = (h - s * 0.866) / 2;
-      const P = [[cx, top], [cx - s / 2, top + s * 0.866], [cx + s / 2, top + s * 0.866]];
-      let x = cx, y = h / 2; let seed = 7;
-      const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-      ctx.fillStyle = ink;
-      for (let i = 0, n = Math.min(steps, 6000) * 6; i < n; i++) {
-        const p = P[Math.floor(rnd() * 3)];
-        x = (x + p[0]) / 2; y = (y + p[1]) / 2;
-        if (i > 10) ctx.fillRect(x, y, 1, 1);
-      }
-      return 6000;
-    },
-    koch(ctx, w, h, steps) {
-      const s = Math.min(w, h) * 0.62, cx = w / 2, cy = h / 2 + s * 0.08;
-      const r = s / Math.sqrt(3);
-      let pts = [0, 1, 2].map((k) => [cx + r * Math.cos(-Math.PI / 2 + k * 2 * Math.PI / 3), cy + r * Math.sin(-Math.PI / 2 + k * 2 * Math.PI / 3)]);
-      pts.push(pts[0]);
-      for (let d = 0; d < 4; d++) {
-        const next = [];
-        for (let i = 0; i < pts.length - 1; i++) {
-          const [ax, ay] = pts[i], [bx, by] = pts[i + 1];
-          const dx = (bx - ax) / 3, dy = (by - ay) / 3;
-          const p1 = [ax + dx, ay + dy], p2 = [ax + 2 * dx, ay + 2 * dy];
-          const px = p1[0] + dx * 0.5 + dy * 0.866, py = p1[1] + dy * 0.5 - dx * 0.866;
-          next.push([ax, ay], p1, [px, py], p2);
-        }
-        next.push(pts[pts.length - 1]); pts = next;
-      }
-      ctx.beginPath(); ctx.moveTo(...pts[0]);
-      for (let i = 1; i < Math.min(pts.length, steps); i++) ctx.lineTo(...pts[i]);
-      ctx.stroke();
-      return pts.length;
-    },
-    fern(ctx, w, h, steps) {
-      let x = 0, y = 0; let seed = 3;
-      const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-      ctx.fillStyle = ink;
-      const sc = h / 11, ox = w / 2;
-      for (let i = 0, n = Math.min(steps, 5000) * 8; i < n; i++) {
-        const r = rnd(); let nx, ny;
-        if (r < 0.01) { nx = 0; ny = 0.16 * y; }
-        else if (r < 0.86) { nx = 0.85 * x + 0.04 * y; ny = -0.04 * x + 0.85 * y + 1.6; }
-        else if (r < 0.93) { nx = 0.2 * x - 0.26 * y; ny = 0.23 * x + 0.22 * y + 1.6; }
-        else { nx = -0.15 * x + 0.28 * y; ny = 0.26 * x + 0.24 * y + 0.44; }
-        x = nx; y = ny;
-        ctx.fillRect(ox + x * sc, h - 10 - y * sc * 0.95, 1, 1);
-      }
-      return 5000;
-    },
-    tree(ctx, w, h, steps) {
-      let count = 0;
-      const branch = (x, y, len, ang, depth) => {
-        if (depth === 0 || count >= steps) return;
-        const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
-        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x2, y2); ctx.stroke(); count++;
-        branch(x2, y2, len * 0.72, ang - 0.42, depth - 1);
-        branch(x2, y2, len * 0.72, ang + 0.36, depth - 1);
-      };
-      branch(w / 2, h * 0.92, h * 0.24, -Math.PI / 2, 11);
-      return 2047;
-    },
-  };
-
-  function render(canvas, progress) {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if (canvas.width !== w * dpr) { canvas.width = w * dpr; canvas.height = h * dpr; }
-    const ctx = canvas.getContext('2d');
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-    ctx.strokeStyle = ink; ctx.lineWidth = 0.9; ctx.lineJoin = 'round';
-    return draw[canvas.dataset.kind](ctx, w, h, progress);
-  }
-
-  const canvases = document.querySelectorAll('canvas.fractal');
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      io.unobserve(e.target);
-      const c = e.target;
-      if (REDUCED) { render(c, 1e9); continue; }
-      const total = render(c, 1);
-      let p = 1; const t0 = performance.now();
-      const step = (now) => {
-        p = Math.ceil(total * Math.min(1, (now - t0) / 1800));
-        render(c, p);
-        if (p < total) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }
-  }, { rootMargin: '0px 0px -10% 0px' });
-  canvases.forEach((c) => io.observe(c));
-  addEventListener('resize', () => canvases.forEach((c) => render(c, 1e9)));
-})();
-
-// Footer: a Barnsley fern that grows row of fronds across the bottom.
-(() => {
-  const c = document.getElementById('fern');
-  if (!c) return;
-  const io = new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting) return;
-    io.disconnect();
-    const dpr = Math.min(devicePixelRatio || 1, 2), w = c.clientWidth, h = c.clientHeight;
-    c.width = w * dpr; c.height = h * dpr;
-    const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const cols = ['#7fcfb7', '#8fb3dc', '#b5a1d8', '#dda1b1', '#eaae8c'];
-    const plants = Math.max(3, Math.round(w / 160));
-    const state = Array.from({ length: plants }, (_, i) => ({ x: 0, y: 0, ox: (i + 0.5) * w / plants, sc: h / 11 * (0.7 + ((i * 37) % 10) / 25), col: cols[i % cols.length], flip: i % 2 ? -1 : 1 }));
-    let n = 0;
-    const tick = () => {
-      for (const s of state) {
-        ctx.fillStyle = s.col;
-        for (let k = 0; k < 220; k++) {
-          const r = Math.random(); let nx, ny; const { x, y } = s;
-          if (r < 0.01) { nx = 0; ny = 0.16 * y; }
-          else if (r < 0.86) { nx = 0.85 * x + 0.04 * y; ny = -0.04 * x + 0.85 * y + 1.6; }
-          else if (r < 0.93) { nx = 0.2 * x - 0.26 * y; ny = 0.23 * x + 0.22 * y + 1.6; }
-          else { nx = -0.15 * x + 0.28 * y; ny = 0.26 * x + 0.24 * y + 0.44; }
-          s.x = nx; s.y = ny;
-          ctx.fillRect(s.ox + s.flip * nx * s.sc, h - ny * s.sc, 1.1, 1.1);
-        }
-      }
-      if (++n < (REDUCED ? 1 : 90)) requestAnimationFrame(tick);
-    };
-    if (REDUCED) { for (let i = 0; i < 90; i++) tick(); } else tick();
-  });
-  io.observe(c);
-})();
-
-// ── PENGUIN edition ──
+// The penguins: they watch the cursor, blink, and one slides down the timeline.
 
 // Every penguin on the page watches the cursor and blinks now and then.
 (() => {
@@ -360,31 +210,6 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-// Pebble (the hero penguin) waves when hovered or tapped and says something.
-(() => {
-  const p = document.getElementById('pebble');
-  const speech = document.getElementById('speech');
-  if (!p) return;
-  const lines = [
-    'hi! i’m pebble.',
-    'ashee is open to summer 2027 internships.',
-    'psst, the résumé button is right there →',
-    'penguins give pebbles to people they like. here: ●',
-    'did you know ashee writes poems?',
-    'i also slide down the timeline. scroll and see.',
-  ];
-  let i = 0, busy = false;
-  const poke = () => {
-    if (busy) return; busy = true;
-    p.classList.add('wave', 'waddle');
-    i = (i + 1) % lines.length;
-    speech.textContent = lines[i];
-    setTimeout(() => { p.classList.remove('wave', 'waddle'); busy = false; }, 1800);
-  };
-  p.addEventListener('pointerenter', poke);
-  document.getElementById('pebble-btn')?.addEventListener('click', poke);
-})();
-
 // A second penguin belly-slides down the experience timeline as you scroll.
 (() => {
   const slider = document.querySelector('.slider');
@@ -406,11 +231,4 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
   addEventListener('resize', update);
   update();
-})();
-
-// Footer penguin waves when it scrolls into view.
-(() => {
-  const fp = document.querySelector('.foot-penguin');
-  if (!fp || REDUCED) return;
-  new IntersectionObserver(([e]) => { if (e.isIntersecting) { fp.classList.add('wave'); setTimeout(() => fp.classList.remove('wave'), 2000); } }).observe(fp);
 })();

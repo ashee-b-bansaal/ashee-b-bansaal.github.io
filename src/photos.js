@@ -1,5 +1,3 @@
-// ── SCRAPBOOK edition ──
-
 // Polaroids on the hero "table": drag them anywhere, and they lean
 // gently toward the cursor while you move around.
 (() => {

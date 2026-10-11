@@ -1,4 +1,4 @@
-// ── shared behaviour (all three designs) ──
+// ── shared behaviour: nav highlight, scroll fade-in, clock ──
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Highlight the nav link for the section on screen.
@@ -17,7 +17,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Fade things up as they scroll into view.
 (() => {
-  const els = document.querySelectorAll('.card, .proj, .page, .hob, .sec-head, .skills, .about-text');
+  const els = document.querySelectorAll('.card, .proj, .page, .pcard, .hob, .sec-head, .skills, .about-text');
   if (REDUCED || !('IntersectionObserver' in window)) return;
   els.forEach((el) => el.classList.add('pre'));
   const io = new IntersectionObserver((entries) => {

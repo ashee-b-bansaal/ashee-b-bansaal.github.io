@@ -1,4 +1,4 @@
-// ── PENGUIN edition ──
+// The penguins: they watch the cursor, blink, and one slides down the timeline.
 
 // Every penguin on the page watches the cursor and blinks now and then.
 (() => {
@@ -38,31 +38,6 @@
   });
 })();
 
-// Pebble (the hero penguin) waves when hovered or tapped and says something.
-(() => {
-  const p = document.getElementById('pebble');
-  const speech = document.getElementById('speech');
-  if (!p) return;
-  const lines = [
-    'hi! i’m pebble.',
-    'ashee is open to summer 2027 internships.',
-    'psst, the résumé button is right there →',
-    'penguins give pebbles to people they like. here: ●',
-    'did you know ashee writes poems?',
-    'i also slide down the timeline. scroll and see.',
-  ];
-  let i = 0, busy = false;
-  const poke = () => {
-    if (busy) return; busy = true;
-    p.classList.add('wave', 'waddle');
-    i = (i + 1) % lines.length;
-    speech.textContent = lines[i];
-    setTimeout(() => { p.classList.remove('wave', 'waddle'); busy = false; }, 1800);
-  };
-  p.addEventListener('pointerenter', poke);
-  document.getElementById('pebble-btn')?.addEventListener('click', poke);
-})();
-
 // A second penguin belly-slides down the experience timeline as you scroll.
 (() => {
   const slider = document.querySelector('.slider');
@@ -84,11 +59,4 @@
   addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
   addEventListener('resize', update);
   update();
-})();
-
-// Footer penguin waves when it scrolls into view.
-(() => {
-  const fp = document.querySelector('.foot-penguin');
-  if (!fp || REDUCED) return;
-  new IntersectionObserver(([e]) => { if (e.isIntersecting) { fp.classList.add('wave'); setTimeout(() => fp.classList.remove('wave'), 2000); } }).observe(fp);
 })();

@@ -1,0 +1,29 @@
+/* ── Edit mode (only loaded by editor.py) ── */
+.editing [data-edit] { pointer-events: auto; cursor: text; border-radius: 3px; outline: 1.5px dashed transparent; outline-offset: 3px; transition: outline-color .15s, background-color .15s; }
+.editing [data-edit]:hover { outline-color: rgba(255, 61, 139, .55); }
+.editing [data-edit]:focus { outline: 2px solid #ff3d8b; background: rgba(255, 61, 139, .06); }
+.editing [data-edit]:empty::before { content: "(empty, click to write)"; color: #aaa; font-style: italic; }
+.editing .is-empty { display: block !important; }
+.editing .ed-changed { background: rgba(255, 238, 120, .55) !important; }
+.editing .pre { opacity: 1 !important; transform: none !important; }
+.editing .pcard:hover { transform: none; }
+
+.ed-ui { font: 500 13px/1 system-ui, -apple-system, sans-serif; letter-spacing: 0; }
+.ed-ui button, button.ed-ui { font: inherit; cursor: pointer; border: 1px solid #d6d6d6; background: #fff; color: #111; border-radius: 999px; padding: 6px 10px; }
+.ed-ui button:hover:not(:disabled), button.ed-ui:hover { border-color: #111; }
+.ed-ui button:disabled { opacity: .35; cursor: default; }
+.ed-link { margin-left: 6px; padding: 5px 9px !important; font-size: 12px !important; vertical-align: middle; }
+.ed-link.ed-changed { border-color: #c9a800 !important; }
+
+.ed-tools { display: flex; flex-wrap: wrap; gap: 4px; margin: -12px 0 14px; padding-bottom: 12px; border-bottom: 1px dashed #e2e2e2; }
+.ed-tools button { padding: 5px 8px; font-size: 12px; }
+.ed-tools .ed-link { margin-left: 0; }
+.ed-tools .ed-danger { color: #c62828; margin-left: auto; }
+.ed-add { display: block; margin: 28px auto 0; padding: 14px 22px !important; font-size: 15px !important; border-style: dashed !important; }
+
+.ed-bar { position: fixed; z-index: 1000; left: 50%; bottom: 18px; translate: -50% 0; display: flex; align-items: center; gap: 8px;
+  background: #111; color: #fff; padding: 8px 8px 8px 18px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.25); max-width: calc(100vw - 32px); }
+.ed-bar .ed-msg { margin-right: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ed-bar button { background: transparent; color: #fff; border-color: #444; padding: 9px 14px; }
+.ed-bar .ed-save { background: #ff3d8b; border-color: #ff3d8b; color: #fff; font-weight: 600; }
+.ed-bar button:hover:not(:disabled) { border-color: #fff; }
