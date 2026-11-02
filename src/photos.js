@@ -9,7 +9,10 @@
   pols.forEach((p) => {
     let sx = 0, sy = 0, ox = 0, oy = 0, dragging = false;
     p.dataset.dx = 0; p.dataset.dy = 0;
+    // stop the browser's native image drag, which would cancel ours
+    p.addEventListener('dragstart', (e) => e.preventDefault());
     p.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
       dragging = true; p.setPointerCapture(e.pointerId);
       p.classList.add('dragging'); p.style.zIndex = ++z;
       sx = e.clientX; sy = e.clientY; ox = +p.dataset.dx; oy = +p.dataset.dy;
