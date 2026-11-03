@@ -39,10 +39,10 @@ EPIGRAPHS = {  # add a line from your poems here to show it under that section's
 }
 
 EXPERIENCE = [
-    dict(logo="Co", role="Co-Founder", org="Stealth startup",
-         when="Present", where="", now=True,  # EDIT: add a start date and location when you can share them
-         text="Building something new in stealth. More to share soon.",
-         tags=[]),
+    dict(logo="ICTA", role="Co-Founder", org="I Can’t Tell Anyone",
+         when="Summer 2026 – Present", where="", now=True,  # EDIT: add a location if you want one
+         text="Co-founded a privacy-first AI social platform built for meaningful conversations and fewer harmful interactions. Built real-time WebSocket infrastructure supporting 5,000+ data streams and brought AI safety inference under 25 ms.",
+         tags=["Next.js", "FastAPI", "WebSockets", "PyTorch", "NVIDIA Triton", "Llama 3.2"]),
     dict(logo="CMU", logo_img="logos/cmu.png", logo_tile=True, venue="Submitting to CVPR’27", role="ML Research Intern", org="Carnegie Mellon University · Semantic Signals Lab", link="https://semanticsignals.com/",
          when="Jun 2026 – Aug 2026", where="Pittsburgh, PA", now=False,
          text="Developed AI visual memory systems for tracking objects across long-form video. Built DINOv2-based identity matching and CUDA/PyTorch GPU pipelines, processing 3,700+ targets in 283 seconds.",
