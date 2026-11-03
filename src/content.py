@@ -190,8 +190,8 @@ HOBBIES = [  # note = the little hand-written sticker on the card
     dict(id="poetry", title="Poetry", icon="quill", note="100 poems, one book",
          text="I write poems, enough of them that they became a book: <em>Silent Voices, Loud Whispers</em>, 100 poems for the journey within.",
          link=("Read the Book", "https://www.amazon.com/dp/8119483065"), tint="peach"),
-    dict(id="music", title="Music", icon="drum", note="new this summer: drums!",
-         text="I love playing and learning new instruments. Most recently, I picked up the drums this summer.", link=None, tint="mint"),
+    dict(id="music", title="Music", icon="drum", note="5-year classical degree in keys",
+         text="I play keyboard, flute and guitar, and this summer I picked up the drums. Keyboard is where it all started: I studied it classically for five years and hold a degree in it.", link=None, tint="mint"),
     dict(id="photo", title="Photography", icon="camera", note="always carrying a camera",
          text="I take a lot of photos. A few of them ended up on this site.", link=None, tint="sky"),
 ]
@@ -211,5 +211,6 @@ ICONS = {
     "flute": '<svg viewBox="0 0 32 32"><path d="M4 22L26 8l2 3L6 25z"/><circle cx="12" cy="18.3" r="1"/><circle cx="16" cy="15.8" r="1"/><circle cx="20" cy="13.3" r="1"/></svg>',
     "keys": '<svg viewBox="0 0 32 32"><rect x="3" y="8" width="26" height="16" rx="1.5"/><path d="M8.2 8v16M13.4 8v16M18.6 8v16M23.8 8v16"/><path d="M6.6 8v9h3.2V8M11.8 8v9h3.2V8M22.2 8v9h3.2V8" class="f"/></svg>',
     "drum": '<svg viewBox="0 0 32 32"><ellipse cx="16" cy="13" rx="11" ry="4"/><path d="M5 13v8c0 2.2 4.9 4 11 4s11-1.8 11-4v-8M9 16.5l3 7.5M23 16.5l-3 7.5M16 17v8"/><path d="M22 4l-6 7M26 6l-8 6"/></svg>',
+    "guitar": '<svg viewBox="0 0 32 32"><path d="M19 13l8-8M25 3l4 4"/><path d="M17.5 11.5c-2-1-4.5-.6-5.6 1.2-.6 1-1.8 1.4-3 1.6C6 14.7 4 16.8 4 19.8 4 24.9 7.1 28 12.2 28c3 0 5.1-2 5.5-4.9.2-1.2.6-2.4 1.6-3 1.8-1.1 2.2-3.6 1.2-5.6"/><circle cx="12.5" cy="19.5" r="2"/><path d="M9 21l3 3"/></svg>',
     "camera": '<svg viewBox="0 0 32 32"><rect x="4" y="9" width="24" height="17" rx="2.5"/><path d="M11 9l2-3h6l2 3"/><circle cx="16" cy="17.5" r="5"/></svg>',
 }

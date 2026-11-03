@@ -204,7 +204,7 @@ def skills(num):
         f'<li>{skill_logo(t)}<span data-edit="SKILLS.{i}.1.{j}">{t}</span></li>' for j, t in enumerate(items))
     cols = "".join(
         f'''<div class="skill-card tint-{tints[i % len(tints)]}">
-          <div class="skill-head"><h3 data-edit="SKILLS.{i}.0">{name}</h3><span class="skill-count">{len(items):02d}</span></div>
+          <div class="skill-head"><h3 data-edit="SKILLS.{i}.0">{name}</h3></div>
           <ul class="skill-list">{chips(i, items)}</ul>
         </div>'''
         for i, (name, items) in enumerate(SKILLS))
@@ -258,9 +258,10 @@ def hob_art(h):
     icon = f'<span class="hob-icon">{ICONS[h["icon"]]}</span>'
     if h["id"] == "poetry":
         return f'''<div class="book"><div class="book-page"><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="book-cover"><em>Silent Voices,<br>Loud Whispers</em><small>100 poems</small></div></div>{icon}'''
+              <div class="book-cover"><img src="photos/book-cover.jpg" alt="" width="324" height="500" loading="lazy"></div></div>{icon}'''
     if h["id"] == "music":
-        return f'{icon}<div class="eq">{"<i></i>" * 9}</div>'
+        kit = "".join(f'<span class="hob-icon">{ICONS[k]}</span>' for k in ("keys", "flute", "guitar", "drum"))
+        return f'<div class="kit">{kit}</div><div class="eq">{"<i></i>" * 11}</div>'
     if h["id"] == "photo":
         picks = [POLAROIDS[i] for i in (3, 2, 5)]
         prints = "".join(f'<span class="print"><img src="{p[0]}" alt="" loading="lazy" style="object-position:{p[6]}"></span>' for p in picks)

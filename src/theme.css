@@ -157,10 +157,12 @@ body.no-webgl .hero { background: var(--bg); }
 .pcard .link-pill:hover { background: #fff; color: #000; }
 
 /* hobbies: tilted cards, each with a little scene that comes alive on hover */
-.hob-sec .hob-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; max-width: 1080px; margin: 0 auto; }
-.hob-sec .hob { text-align: center; display: flex; flex-direction: column; align-items: center; padding: 18px 24px 28px; }
+.hob-sec .wrap { max-width: 1360px; }
+.hob-sec .hob-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px; max-width: 1280px; margin: 0 auto; }
+.hob-sec .hob { text-align: center; display: flex; flex-direction: column; align-items: center; padding: 26px 34px 36px; }
+.hob-sec .hob p { font-size: 16px; line-height: 1.6; max-width: 34ch; }
 .hob-sec .hob .link-pill { margin-top: auto; }
-@media (max-width: 900px) { .hob-sec .hob-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+@media (max-width: 1000px) { .hob-sec .hob-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; } }
 .ticket { position: relative; border: none; border-radius: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 10px 26px rgba(0,0,0,.06);
   transition: rotate .35s cubic-bezier(.2,.8,.2,1.2), transform .35s cubic-bezier(.2,.8,.2,1.2), box-shadow .3s; }
 .ticket::before { content: ""; position: absolute; top: -11px; left: 50%; width: 80px; height: 22px; translate: -50% 0; rotate: 3deg;
@@ -171,37 +173,40 @@ body.no-webgl .hero { background: var(--bg); }
 .ticket:nth-child(1) { rotate: -1.5deg; } .ticket:nth-child(2) { rotate: .8deg; } .ticket:nth-child(3) { rotate: -.6deg; }
 .ticket:hover { rotate: 0deg; transform: translateY(-6px); box-shadow: 0 2px 4px rgba(0,0,0,.06), 0 22px 44px rgba(0,0,0,.12); }
 
-.hob-art { position: relative; width: 100%; height: 150px; display: grid; place-items: center; margin-bottom: 6px; }
+.hob-art { position: relative; width: 100%; height: 200px; display: grid; place-items: center; margin-bottom: 6px; }
 .hob-art .hob-icon svg { width: 40px; height: 40px; margin: 0; transition: transform .4s cubic-bezier(.2,.8,.2,1.4); }
 .hob-note { display: inline-block; font-size: 18px; line-height: 1.1; color: #222; background: rgba(255,255,255,.75); padding: 5px 12px 6px;
   border-radius: 4px; rotate: -3deg; margin: 0 0 14px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
 
 /* poetry: a little book that opens */
-.hob-poetry .hob-icon { position: absolute; right: 16%; top: 6px; rotate: 14deg; }
+.hob-poetry .hob-icon { position: absolute; right: 14%; top: 10px; rotate: 14deg; }
 .hob-poetry:hover .hob-icon svg { transform: translate(-6px, 6px) rotate(-12deg); }
-.book { position: relative; width: 96px; height: 128px; perspective: 600px; rotate: -4deg; }
+.book { position: relative; width: 118px; height: 182px; perspective: 700px; rotate: -4deg; }
 .book-page, .book-cover { position: absolute; inset: 0; border-radius: 2px 6px 6px 2px; }
-.book-page { background: #fffdf6; box-shadow: 0 6px 16px rgba(0,0,0,.12); padding: 22px 14px; display: flex; flex-direction: column; gap: 9px; }
+.book-page { background: #fffdf6; box-shadow: 0 6px 16px rgba(0,0,0,.12); padding: 30px 18px; display: flex; flex-direction: column; gap: 9px; }
 .book-page i { display: block; height: 2px; background: rgba(0,0,0,.14); border-radius: 2px; }
 .book-page i:nth-child(2n) { width: 70%; } .book-page i:nth-child(3) { width: 85%; }
-.book-cover { background: #1d1d1d; color: #fff; transform-origin: left center; transition: transform .6s cubic-bezier(.2,.8,.2,1);
-  display: flex; flex-direction: column; justify-content: space-between; padding: 14px 10px 10px 14px; text-align: left;
-  box-shadow: inset 6px 0 0 rgba(255,255,255,.12), 0 6px 16px rgba(0,0,0,.18); }
-.book-cover em { font: 400 14px/1.15 var(--hand); }
-.book-cover small { font: 500 8px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+.book-cover { overflow: hidden; transform-origin: left center; transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  box-shadow: inset 6px 0 0 rgba(255,255,255,.18), 0 8px 20px rgba(0,0,0,.22); }
+.book-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.book-cover::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 7px; background: linear-gradient(90deg, rgba(0,0,0,.25), rgba(255,255,255,.15)); }
 .hob-poetry:hover .book-cover { transform: rotateY(-62deg); }
 
 /* music: the drum plus an equaliser that plays on hover */
-.hob-music .hob-art { grid-template-rows: auto auto; align-content: center; gap: 14px; }
-.hob-music .hob-icon { position: relative; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 50%; background: rgba(255,255,255,.8);
+.hob-music .hob-art { grid-template-rows: auto auto; align-content: center; gap: 22px; }
+.kit { display: flex; gap: 10px; }
+.kit .hob-icon { position: relative; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.82);
   box-shadow: 0 4px 12px rgba(0,0,0,.08); }
-.hob-music .hob-icon::before, .hob-music .hob-icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(0,0,0,.25); opacity: 0; }
-.hob-music:hover .hob-icon::before { animation: ripple 1.2s ease-out infinite; }
-.hob-music:hover .hob-icon::after { animation: ripple 1.2s ease-out .6s infinite; }
-@keyframes ripple { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(1.7); } }
-.hob-music .hob-icon svg { width: 52px; height: 52px; }
-.hob-music:hover .hob-icon svg { animation: thump .5s ease-in-out infinite; }
-@keyframes thump { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.1) rotate(-3deg); } }
+.kit .hob-icon:nth-child(odd) { translate: 0 -6px; }
+.kit .hob-icon svg { width: 32px; height: 32px; }
+.kit .hob-icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(0,0,0,.25); opacity: 0; }
+.hob-music:hover .kit .hob-icon svg { animation: thump .5s ease-in-out infinite; }
+.hob-music:hover .kit .hob-icon::after { animation: ripple 1.2s ease-out infinite; }
+.kit .hob-icon:nth-child(2) svg, .kit .hob-icon:nth-child(2)::after { animation-delay: -.15s !important; }
+.kit .hob-icon:nth-child(3) svg, .kit .hob-icon:nth-child(3)::after { animation-delay: -.3s !important; }
+.kit .hob-icon:nth-child(4) svg, .kit .hob-icon:nth-child(4)::after { animation-delay: -.45s !important; }
+@keyframes thump { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.12) rotate(-4deg); } }
+@keyframes ripple { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(1.6); } }
 .eq { display: flex; align-items: flex-end; gap: 5px; height: 34px; }
 .eq i { width: 7px; height: 30%; background: #1d1d1d; border-radius: 3px; transform-origin: bottom; }
 .eq i:nth-child(odd) { height: 55%; } .eq i:nth-child(3n) { height: 80%; } .eq i:nth-child(4n) { height: 40%; }
@@ -212,13 +217,13 @@ body.no-webgl .hero { background: var(--bg); }
 @keyframes bar { from { transform: scaleY(.25); } to { transform: scaleY(1.25); } }
 
 /* photography: a stack of prints that fans out */
-.prints { position: relative; width: 150px; height: 120px; }
-.print { position: absolute; left: 50%; top: 50%; width: 92px; height: 104px; margin: -52px 0 0 -46px; background: #fff; padding: 6px 6px 18px;
+.prints { position: relative; width: 170px; height: 150px; }
+.print { position: absolute; left: 50%; top: 50%; width: 112px; height: 128px; margin: -64px 0 0 -56px; background: #fff; padding: 6px 6px 18px;
   box-shadow: 0 4px 12px rgba(0,0,0,.14); transition: transform .5s cubic-bezier(.2,.8,.2,1.2); }
 .print img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .print:nth-child(1) { transform: rotate(-8deg); } .print:nth-child(2) { transform: rotate(5deg); } .print:nth-child(3) { transform: rotate(-1deg); }
-.hob-photo:hover .print:nth-child(1) { transform: translateX(-52px) rotate(-14deg); }
-.hob-photo:hover .print:nth-child(2) { transform: translateX(52px) rotate(12deg); }
+.hob-photo:hover .print:nth-child(1) { transform: translateX(-62px) rotate(-14deg); }
+.hob-photo:hover .print:nth-child(2) { transform: translateX(62px) rotate(12deg); }
 .hob-photo:hover .print:nth-child(3) { transform: translateY(-6px) rotate(0deg); }
 .hob-photo .hob-icon { position: absolute; right: 8%; bottom: 0; background: #fff; border-radius: 50%; padding: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.12); }
 .hob-photo .hob-icon svg { width: 26px; height: 26px; }
@@ -233,7 +238,6 @@ body.no-webgl .hero { background: var(--bg); }
 .skill-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 18px;
   padding-bottom: 14px; border-bottom: 1px dashed rgba(0,0,0,.2); }
 .skill-card h3 { font: 600 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: 0; color: rgba(0,0,0,.75); }
-.skill-count { font: 400 22px/1 var(--hand); color: rgba(0,0,0,.45); }
 .skill-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .skill-list li { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.78); color: #000; font-size: 14px; line-height: 1;
   padding: 7px 13px 7px 8px; border-radius: 999px; box-shadow: 0 1px 0 rgba(0,0,0,.05); transition: background-color .15s, transform .2s, box-shadow .2s; }
