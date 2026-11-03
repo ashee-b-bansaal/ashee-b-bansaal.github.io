@@ -17,7 +17,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Fade things up as they scroll into view.
 (() => {
-  const els = document.querySelectorAll('.card, .proj, .page, .pcard, .hob, .sec-head, .skills, .about-text');
+  const els = document.querySelectorAll('.card, .proj, .page, .pcard, .hob, .sec-head, .toolbox, .ledger-row, .about-text');
   if (REDUCED || !('IntersectionObserver' in window)) return;
   els.forEach((el) => el.classList.add('pre'));
   const io = new IntersectionObserver((entries) => {

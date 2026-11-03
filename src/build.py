@@ -135,12 +135,14 @@ def exp_card(e, k):
     venue = f'<p class="venue" data-edit="{k}.venue">{e["venue"]}</p>' if e.get("venue") else ""
     text = f'\n              <p data-edit="{k}.text">{e["text"]}</p>' if e.get("text") else ""
     tags = f'\n              <ul class="tags">{tags}</ul>' if tags else ""
+    when = (f'<p class="when"><span data-edit="{k}.when">{e["when"]}</span> <span data-edit="{k}.where">{e["where"]}</span></p>'
+            if e.get("when") or e.get("where") else "")
     return f'''<article class="card exp-card">
               <header class="card-head">
                 {logo(e, k)}
                 <div><h3 data-edit="{k}.role">{e['role']}</h3>{org(e, k)}{venue}</div>
               </header>
-              <p class="when"><span data-edit="{k}.when">{e['when']}</span> <span data-edit="{k}.where">{e['where']}</span></p>{text}{tags}
+              {when}{text}{tags}
             </article>'''
 
 
@@ -166,9 +168,6 @@ def experience(num, title, extra_inside_timeline="", title_key=None):
 
 def leadership(num):
     cards = "\n".join(f'          <li class="lead-item">{exp_card(e, f"LEADERSHIP.{i}")}</li>' for i, e in enumerate(LEADERSHIP))
-    service = "".join(
-        f'''<li><b data-edit="SERVICE.{i}.0">{role}</b><span data-edit="SERVICE.{i}.1">{text}</span></li>'''
-        for i, (role, text) in enumerate(SERVICE))
     return f'''
     <section id="leadership" class="sec lead-sec">
       <div class="wrap">
@@ -176,43 +175,43 @@ def leadership(num):
         <ul class="lead-grid">
 {cards}
         </ul>
-        <div class="service">
-          <h3 class="hand">also: service</h3>
-          <ul>{service}</ul>
-        </div>
       </div>
     </section>
 '''
 
 
 def honors(num):
-    tints = ["lilac", "mint", "coral", "lime"]
-    cards = "\n".join(f'''          <li class="honor tint-{tints[i % len(tints)]}">
-            <p class="honor-amount" data-edit="HONORS.{i}.amount">{h['amount']}</p>
-            <h3 data-edit="HONORS.{i}.title">{h['title']}</h3>
-            <p class="honor-org" data-edit="HONORS.{i}.org">{h['org']}</p>
-            <p data-edit="HONORS.{i}.text">{h['text']}</p>
+    """A ledger: one ruled row per award, the headline figure huge on the left."""
+    tints = ["lime", "lilac", "mint", "coral"]
+    rows = "\n".join(f'''          <li class="ledger-row" style="--tint: var(--{tints[i % len(tints)]})">
+            <p class="ledger-big"><span class="count" data-edit="HONORS.{i}.big">{h['big']}</span><small data-edit="HONORS.{i}.label">{h['label']}</small></p>
+            <div class="ledger-copy">
+              <h3 data-edit="HONORS.{i}.title">{h['title']}</h3>
+              <p class="ledger-org" data-edit="HONORS.{i}.org">{h['org']}</p>
+              <p data-edit="HONORS.{i}.text">{h['text']}</p>
+            </div>
+            <span class="ledger-idx" aria-hidden="true">{i + 1:02d}</span>
           </li>''' for i, h in enumerate(HONORS))
     return f'''
     <section id="honors" class="sec honors-sec">
       <div class="wrap">
         {section_head(num, TITLES["honors"], "honors", title_key="honors")}
-        <ul class="honor-grid">
-{cards}
-        </ul>
+        <ol class="ledger">
+{rows}
+        </ol>
       </div>
     </section>
 '''
 
 
 def hobbies(num, title, render, title_key=None):
-    cards = "\n".join(render(h) for h in HOBBIES)
+    rows = "\n".join(render(h) for h in HOBBIES)
     return f'''
     <section id="hobbies" class="sec hob-sec">
       <div class="wrap">
         {section_head(num, title, "hobbies", title_key=title_key)}
-        <div class="hob-grid">
-{cards}
+        <div class="hob-list">
+{rows}
         </div>
       </div>
     </section>
@@ -241,25 +240,30 @@ SKILL_ICONS = {  # skill name -> file in icons/ (a skill without one gets a lett
 def skill_logo(name):
     f = SKILL_ICONS.get(re.sub(r"<[^>]+>", "", name).replace("&amp;", "&").strip())
     if f and os.path.exists(os.path.join(ROOT, "icons", f + ".svg")):
-        return f'<img src="icons/{f}.svg" alt="" width="22" height="22" loading="lazy">'
+        return f'<img src="icons/{f}.svg" alt="" width="34" height="34" loading="lazy">'
     return f'<b class="mono-logo">{re.sub(r"[^A-Za-z0-9+#]", "", name)[:2] or "?"}</b>'
 
 
 def skills(num):
-    tints = ["lilac", "mint", "coral", "lime", "pink", "cream"]
-    chips = lambda i, items: "".join(
-        f'<li>{skill_logo(t)}<span data-edit="SKILLS.{i}.1.{j}">{t}</span></li>' for j, t in enumerate(items))
-    cols = "".join(
-        f'''<div class="skill-card tint-{tints[i % len(tints)]}">
-          <div class="skill-head"><h3 data-edit="SKILLS.{i}.0">{name}</h3></div>
-          <ul class="skill-list">{chips(i, items)}</ul>
-        </div>'''
-        for i, (name, items) in enumerate(SKILLS))
+    """A dark panel of logo tiles; the buttons on top filter it by group (see extras.js)."""
+    total = sum(len(items) for _, items in SKILLS)
+    filters = '<button type="button" aria-pressed="true" data-filter="all">All</button>' + "".join(
+        f'<button type="button" aria-pressed="false" data-filter="g{i}"><span data-edit="SKILLS.{i}.0">{name}</span></button>'
+        for i, (name, _) in enumerate(SKILLS))
+    tiles = "".join(
+        f'<li data-group="g{i}">{skill_logo(t)}<span data-edit="SKILLS.{i}.1.{j}">{t}</span></li>'
+        for i, (_, items) in enumerate(SKILLS) for j, t in enumerate(items))
     return f'''
     <section id="skills" class="sec skills-sec">
       <div class="wrap">
         {section_head(num, TITLES["skills"], None, title_key="skills")}
-        <div class="skills">{cols}</div>
+        <div class="toolbox">
+          <div class="tb-bar">
+            <p class="tb-path"><span aria-hidden="true">~/</span>toolbox <span class="tb-count" aria-live="polite">{total} tools</span></p>
+            <div class="tb-filters" role="group" aria-label="Filter tools by group">{filters}</div>
+          </div>
+          <ul class="tb-grid">{tiles}</ul>
+        </div>
         <p class="edu" data-edit="EDU">{EDU}</p>
       </div>
     </section>
@@ -301,7 +305,7 @@ def polaroid(src, cap, tint, cls="", style="", pos="50% 50%"):
 
 
 def hob_art(h):
-    """The little scene at the top of each hobby card; animates on hover."""
+    """The scene beside each hobby; animates on hover."""
     icon = f'<span class="hob-icon">{ICONS[h["icon"]]}</span>'
     if h["id"] == "poetry":
         return f'''<div class="book"><div class="book-page"><i></i><i></i><i></i><i></i><i></i></div>
@@ -355,10 +359,14 @@ def build_page():
         k = f"HOBBIES.{HOBBIES.index(h)}"
         link = f'<a class="link-pill" href="{h["link"][1]}" data-edit-href="{k}.link.1"><span data-edit="{k}.link.0">{h["link"][0]}</span> ↗</a>' if h["link"] else ""
         note = f'<span class="hob-note hand" data-edit="{k}.note">{h["note"]}</span>' if h.get("note") else ""
-        return f'''          <article class="hob ticket tint-{h['tint']} hob-{h['id']}">
-            <div class="hob-art" aria-hidden="true">{hob_art(h)}</div>{note}
-            <h3 data-edit="{k}.title">{h['title']}</h3>
-            <p data-edit="{k}.text">{h['text']}</p>{link}
+        n = HOBBIES.index(h) + 1
+        return f'''          <article class="hob hob-row hob-{h['id']}">
+            <div class="hob-art" aria-hidden="true"><span class="blob tint-{h['tint']}"></span>{hob_art(h)}</div>
+            <div class="hob-copy">
+              <p class="hob-num">{n:02d} / {len(HOBBIES):02d}</p>
+              <h3 data-edit="{k}.title">{h['title']}</h3>{note}
+              <p data-edit="{k}.text">{h['text']}</p>{link}
+            </div>
           </article>'''
 
     marquee_items = ["SWE", "ML", "Cornell ’28", "poet", "flautist", "keys", "always carrying a camera", "Ithaca, NY", "open to Summer 2027"]
@@ -452,7 +460,7 @@ def penguin_svg(cls="", ident=""):
 def build_assets():
     read = lambda f: open(os.path.join(HERE, f), encoding="utf-8").read()
     open(os.path.join(ROOT, "style.css"), "w").write(read("base.css") + "\n" + read("theme.css"))
-    open(os.path.join(ROOT, "app.js"), "w").write("\n".join(read(f) for f in ("base.js", "photos.js", "julia.js", "penguin.js")))
+    open(os.path.join(ROOT, "app.js"), "w").write("\n".join(read(f) for f in ("base.js", "photos.js", "julia.js", "penguin.js", "extras.js")))
 
 
 if "--watch" in sys.argv:

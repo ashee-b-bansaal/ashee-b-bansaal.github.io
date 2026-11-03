@@ -72,33 +72,34 @@ EXPERIENCE = [
 ]
 
 # ── LEADERSHIP & SERVICE ─────────────────────────────────────────────────────
-#  Same fields as EXPERIENCE. SERVICE is the short list underneath.
+#  Same fields as EXPERIENCE ("when"/"where" can be "" to hide that line).
 LEADERSHIP = [
     dict(logo="XR", logo_img="logos/cuxr.png", logo_tile=True, role="BCI Sub-team Lead", org="Cornell Extended Reality Project Team",
          when="Jan 2025 – Present", where="Ithaca, NY", now=True,
          text="Lead a team of six: GitHub Actions CI, code review, and sprint planning, which cut integration bugs by 40%. See the BCI project above.",
          tags=["Leadership", "CI/CD", "Python"]),
-    dict(logo="IEEE", role="Corporate E-Board", org="IEEE · Cornell University",
+    dict(logo="IEEE", role="Corporate E-Board", org="Cornell IEEE",
          when="Jan 2025 – Jan 2026", where="Ithaca, NY", now=False,
-         text="",  # EDIT: one line on what you did, e.g. sponsors you brought in or events you ran
-         tags=[]),
-]
-
-SERVICE = [  # (role, what it involved)
-    ("External Reviewer, CHI 2026", "Reviewing submissions in sensing and interaction systems."),
-    ("Invited Panelist, ACSU Undergraduate Research Panel", "Discussing undergraduate research experiences and pathways."),
+         text="Secured partnerships with ~150 companies, including Marvell Technology, to organize Cornell IEEE corporate events.",
+         tags=["Partnerships", "Events"]),
+    dict(logo="CHI", role="External Reviewer", org="ACM CHI 2026", when="", where="", now=False,
+         text="Reviewing submissions in sensing and interaction systems.",
+         tags=["Peer Review", "HCI"]),
+    dict(logo="ACSU", role="Invited Panelist", org="ACSU Undergraduate Research Panel", when="", where="Ithaca, NY", now=False,
+         text="Discussing undergraduate research experiences and pathways.",
+         tags=["Mentorship", "Research"]),
 ]
 
 # ── HONORS & AWARDS ──────────────────────────────────────────────────────────
-HONORS = [  # amount = the big figure on the card
-    dict(title="Bowers Undergraduate Research Experience (BURE) Scholarship", org="Cornell University", amount="$7,000",
-         text="Research stipend, plus continued support through the BURE Academic Year Expansion Program."),
-    dict(title="Summer Experiential Grant", org="Cornell University", amount="$6,000",
+HONORS = [  # big = the headline figure (it counts up on screen); label = the small line under it
+    dict(big="#1", label="All India Rank", title="Meritorious Student Scholarship", org="Government of India",
+         text="Awarded $1,500 after achieving <strong>All India Rank 1</strong> in the national secondary school examinations."),
+    dict(big="$100K", label="per year", title="Foreign Student Scholarship", org="Cornell University",
+         text="About $100,000 a year in institutional support."),
+    dict(big="$7,000", label="research stipend", title="Bowers Undergraduate Research Experience (BURE) Scholarship", org="Cornell University",
+         text="Selected for continued support through the BURE Academic Year Expansion Program."),
+    dict(big="$6,000", label="summer grant", title="Summer Experiential Grant", org="Cornell University",
          text="Awarded to support summer research in 2026."),
-    dict(title="Foreign Student Scholarship", org="Cornell University", amount="~$100K / yr",
-         text="Institutional support of about $100,000 per year."),
-    dict(title="Meritorious Student Scholarship", org="Government of India", amount="$1,500",
-         text="Awarded for achieving <strong>All India Rank 1</strong> in the national secondary school examinations."),
 ]
 
 # ── PROJECTS ─────────────────────────────────────────────────────────────────
