@@ -26,8 +26,8 @@ strong { font-weight: 600; }
 
 /* buttons */
 .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font: 500 15px/1 var(--sans); padding: 13px 22px; border-radius: var(--btn-radius, 999px); transition: background-color .2s, color .2s, transform .15s, box-shadow .2s; }
-.btn-primary { background: var(--btn-bg, var(--ink)); color: var(--btn-fg, #fff); }
-.btn-primary:hover { background: var(--btn-bg-hover, #000); }
+.btn-primary { background: var(--btn-bg, var(--ink)); color: var(--btn-fg, var(--bg)); }
+.btn-primary:hover { background: var(--btn-bg-hover, var(--ink)); opacity: .88; }
 .btn-outline { border: 1px solid var(--hair-strong); color: var(--ink); background: color-mix(in srgb, var(--bg) 60%, transparent); }
 .btn-outline:hover { border-color: var(--ink); }
 .btn:active { transform: translateY(1px); }
@@ -94,8 +94,8 @@ strong { font-weight: 600; }
 /* hobbies */
 .hob-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 .hob { border-radius: var(--r-card); padding: 26px 24px; background: var(--card); border: 1px solid var(--hair); }
-.hob-icon svg { width: 40px; height: 40px; fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; display: block; margin-bottom: 18px; }
-.hob-icon svg .f { fill: var(--ink); }
+.hob-icon svg { width: 40px; height: 40px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; display: block; margin-bottom: 18px; }
+.hob-icon svg .f { fill: currentColor; }
 .hob h3 { font-size: 20px; margin-bottom: 8px; }
 .hob p { color: var(--body); font-size: 15px; line-height: 1.55; margin: 0 0 16px; }
 
@@ -128,7 +128,7 @@ strong { font-weight: 600; }
   .card { padding: 20px; }
   .when { flex-direction: column; gap: 2px; }
 }
-@media (max-width: 420px) { .nav-icons { display: none; } .nav { grid-template-columns: 1fr; } .nav-links { justify-content: space-between; } }
+@media (max-width: 420px) { .nav-icons li:not(.theme-li) { display: none; } .nav { grid-template-columns: auto 1fr; } .nav-links { justify-content: space-between; } }
 
 /* scroll fade-in */
 .pre { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, border-color .25s; }

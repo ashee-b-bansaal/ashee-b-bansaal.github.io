@@ -41,6 +41,7 @@ SOCIAL = f'''<ul class="nav-icons">
       <li><a href="mailto:{EMAIL}" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></a></li>
       <li><a href="{GITHUB}" aria-label="GitHub"><svg viewBox="0 0 24 24" class="fill"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.7c-2.6.6-3.2-1.2-3.2-1.2-.4-1.1-1-1.4-1-1.4-.9-.6 0-.6 0-.6 1 .1 1.5 1 1.5 1 .8 1.5 2.3 1 2.8.8.1-.6.3-1 .6-1.2-2.1-.2-4.3-1-4.3-4.7 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a9 9 0 0 1 4.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.2.1 2.5.6.7 1 1.6 1 2.6 0 3.7-2.2 4.5-4.3 4.7.3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5z"/></svg></a></li>
       <li><a href="{LINKEDIN}" aria-label="LinkedIn"><svg viewBox="0 0 24 24" class="fill"><path d="M4.5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM3 9h3v11.5H3zM9 9h2.9v1.6c.4-.8 1.4-1.8 3.2-1.8 3.2 0 3.9 2.1 3.9 4.9v6.6h-3v-5.8c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.9H9z"/></svg></a></li>
+      <li class="theme-li"><button type="button" class="theme-toggle" aria-label="Switch to dark mode"><svg viewBox="0 0 24 24" class="moon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg viewBox="0 0 24 24" class="sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg></button></li>
     </ul>'''
 
 
@@ -60,6 +61,7 @@ def head(title_suffix, fonts, desc, theme="#ffffff"):
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script>try{{var t=localStorage.getItem("theme")}}catch(e){{}}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="{title_suffix}">
@@ -245,24 +247,21 @@ def skill_logo(name):
 
 
 def skills(num):
-    """A dark panel of logo tiles; the buttons on top filter it by group (see extras.js)."""
+    """A dark panel: one row per group, its name on the left and its logo tiles on the right."""
     total = sum(len(items) for _, items in SKILLS)
-    filters = '<button type="button" aria-pressed="true" data-filter="all">All</button>' + "".join(
-        f'<button type="button" aria-pressed="false" data-filter="g{i}"><span data-edit="SKILLS.{i}.0">{name}</span></button>'
-        for i, (name, _) in enumerate(SKILLS))
-    tiles = "".join(
-        f'<li data-group="g{i}">{skill_logo(t)}<span data-edit="SKILLS.{i}.1.{j}">{t}</span></li>'
-        for i, (_, items) in enumerate(SKILLS) for j, t in enumerate(items))
+    groups = "".join(
+        f'''<div class="tb-group">
+            <h3 class="tb-name"><span data-edit="SKILLS.{i}.0">{name}</span> <small>{len(items):02d}</small></h3>
+            <ul class="tb-grid">{"".join(f'<li>{skill_logo(t)}<span data-edit="SKILLS.{i}.1.{j}">{t}</span></li>' for j, t in enumerate(items))}</ul>
+          </div>'''
+        for i, (name, items) in enumerate(SKILLS))
     return f'''
     <section id="skills" class="sec skills-sec">
       <div class="wrap">
         {section_head(num, TITLES["skills"], None, title_key="skills")}
         <div class="toolbox">
-          <div class="tb-bar">
-            <p class="tb-path"><span aria-hidden="true">~/</span>toolbox <span class="tb-count" aria-live="polite">{total} tools</span></p>
-            <div class="tb-filters" role="group" aria-label="Filter tools by group">{filters}</div>
-          </div>
-          <ul class="tb-grid">{tiles}</ul>
+          <p class="tb-path"><span aria-hidden="true">~/</span>toolbox <span class="tb-count">{total} tools</span></p>
+          {groups}
         </div>
         <p class="edu" data-edit="EDU">{EDU}</p>
       </div>

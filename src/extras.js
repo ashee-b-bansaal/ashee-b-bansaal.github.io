@@ -1,4 +1,4 @@
-// ── award figures that count up, and the toolbox filter ──
+// ── award figures that count up ──
 
 // Count each award's headline number up from zero when it scrolls into view.
 (() => {
@@ -24,22 +24,3 @@
   els.forEach((el) => io.observe(el));
 })();
 
-// Toolbox: the buttons above the logo grid show one group at a time.
-(() => {
-  const box = document.querySelector('.toolbox');
-  if (!box) return;
-  const buttons = [...box.querySelectorAll('[data-filter]')];
-  const tiles = [...box.querySelectorAll('.tb-grid li')];
-  const count = box.querySelector('.tb-count');
-  buttons.forEach((b) => b.addEventListener('click', () => {
-    const f = b.dataset.filter;
-    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    let shown = 0;
-    tiles.forEach((li) => {
-      const on = f === 'all' || li.dataset.group === f;
-      li.hidden = !on;
-      if (on) { li.style.setProperty('--i', shown++); li.classList.remove('pop'); void li.offsetWidth; li.classList.add('pop'); }
-    });
-    count.textContent = `${shown} tools`;
-  }));
-})();

@@ -1,5 +1,23 @@
-// ── shared behaviour: nav highlight, scroll fade-in, clock ──
+// ── shared behaviour: light/dark switch, nav highlight, scroll fade-in, clock ──
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Light/dark switch. The head script picks the starting theme (saved choice, else the system's).
+(() => {
+  const root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const sync = () => {
+    const dark = root.dataset.theme === 'dark';
+    btn?.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    meta?.setAttribute('content', dark ? '#0f0f11' : '#ffffff');
+  };
+  btn?.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+    sync();
+    dispatchEvent(new Event('themechange'));
+  });
+  sync();
+})();
 
 // Highlight the nav link for the section on screen.
 (() => {
@@ -95,7 +113,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const vs = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }';
   const fs = `
     precision highp float;
-    uniform vec2 res; uniform vec2 c; uniform float zoom;
+    uniform vec2 res; uniform vec2 c; uniform float zoom; uniform float dark;
     vec3 pal(float t){
       // pastel stops: mint → sky → lavender → rose → peach
       vec3 a = vec3(.655,.898,.827), b = vec3(.659,.784,.910), d = vec3(.784,.722,.878), e = vec3(.910,.722,.769), f = vec3(.957,.773,.659);
@@ -113,13 +131,13 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (dot(z, z) > 256.) break;
         n += 1.;
       }
-      vec3 bg = vec3(.961);
-      if (n >= 139.) { gl_FragColor = vec4(mix(bg, vec3(.784,.722,.878), .55), 1.); return; }
+      vec3 bg = mix(vec3(.961), vec3(.059), dark);
+      if (n >= 139.) { gl_FragColor = vec4(mix(bg, vec3(.784,.722,.878), .55 - dark * .3), 1.); return; }
       float sn = n - log2(log2(dot(z, z))) + 4.;
       float t = sqrt(sn / 140.);
       vec3 col = pal(t * 2.2 + .15);
       float strength = smoothstep(.02, .45, t);
-      gl_FragColor = vec4(mix(bg, col, strength * .95), 1.);
+      gl_FragColor = vec4(mix(bg, col, strength * (.95 - dark * .3)), 1.);
     }`;
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
   const prog = gl.createProgram();
@@ -130,7 +148,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
   const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const uRes = gl.getUniformLocation(prog, 'res'), uC = gl.getUniformLocation(prog, 'c'), uZoom = gl.getUniformLocation(prog, 'zoom');
+  const uRes = gl.getUniformLocation(prog, 'res'), uC = gl.getUniformLocation(prog, 'c'), uZoom = gl.getUniformLocation(prog, 'zoom'), uDark = gl.getUniformLocation(prog, 'dark');
 
   const SCALE = 0.6; // render at lower resolution; it's soft anyway
   function resize() {
@@ -162,6 +180,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
       radius += (targetR - radius) * 0.04;
       const cx = radius * Math.cos(angle), cy = radius * Math.sin(angle);
       gl.uniform2f(uC, cx, cy);
+      gl.uniform1f(uDark, document.documentElement.dataset.theme === 'dark' ? 1 : 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       if (out) out.textContent = `c = ${cx.toFixed(3)} ${cy < 0 ? '−' : '+'} ${Math.abs(cy).toFixed(3)}i`;
     }
@@ -170,7 +189,10 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   resize();
   addEventListener('resize', resize);
   frame();
-  if (REDUCED) hero.addEventListener('pointermove', () => requestAnimationFrame(frame));
+  if (REDUCED) {
+    hero.addEventListener('pointermove', () => requestAnimationFrame(frame));
+    addEventListener('themechange', () => requestAnimationFrame(frame));
+  }
 })();
 
 // The penguins: they watch the cursor, blink, and one slides down the timeline.
@@ -236,7 +258,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   update();
 })();
 
-// ── award figures that count up, and the toolbox filter ──
+// ── award figures that count up ──
 
 // Count each award's headline number up from zero when it scrolls into view.
 (() => {
@@ -262,22 +284,3 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   els.forEach((el) => io.observe(el));
 })();
 
-// Toolbox: the buttons above the logo grid show one group at a time.
-(() => {
-  const box = document.querySelector('.toolbox');
-  if (!box) return;
-  const buttons = [...box.querySelectorAll('[data-filter]')];
-  const tiles = [...box.querySelectorAll('.tb-grid li')];
-  const count = box.querySelector('.tb-count');
-  buttons.forEach((b) => b.addEventListener('click', () => {
-    const f = b.dataset.filter;
-    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    let shown = 0;
-    tiles.forEach((li) => {
-      const on = f === 'all' || li.dataset.group === f;
-      li.hidden = !on;
-      if (on) { li.style.setProperty('--i', shown++); li.classList.remove('pop'); void li.offsetWidth; li.classList.add('pop'); }
-    });
-    count.textContent = `${shown} tools`;
-  }));
-})();

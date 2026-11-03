@@ -1,5 +1,23 @@
-// ── shared behaviour: nav highlight, scroll fade-in, clock ──
+// ── shared behaviour: light/dark switch, nav highlight, scroll fade-in, clock ──
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Light/dark switch. The head script picks the starting theme (saved choice, else the system's).
+(() => {
+  const root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const sync = () => {
+    const dark = root.dataset.theme === 'dark';
+    btn?.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    meta?.setAttribute('content', dark ? '#0f0f11' : '#ffffff');
+  };
+  btn?.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+    sync();
+    dispatchEvent(new Event('themechange'));
+  });
+  sync();
+})();
 
 // Highlight the nav link for the section on screen.
 (() => {

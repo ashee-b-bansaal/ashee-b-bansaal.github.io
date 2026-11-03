@@ -12,7 +12,7 @@
   const vs = 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0., 1.); }';
   const fs = `
     precision highp float;
-    uniform vec2 res; uniform vec2 c; uniform float zoom;
+    uniform vec2 res; uniform vec2 c; uniform float zoom; uniform float dark;
     vec3 pal(float t){
       // pastel stops: mint → sky → lavender → rose → peach
       vec3 a = vec3(.655,.898,.827), b = vec3(.659,.784,.910), d = vec3(.784,.722,.878), e = vec3(.910,.722,.769), f = vec3(.957,.773,.659);
@@ -30,13 +30,13 @@
         if (dot(z, z) > 256.) break;
         n += 1.;
       }
-      vec3 bg = vec3(.961);
-      if (n >= 139.) { gl_FragColor = vec4(mix(bg, vec3(.784,.722,.878), .55), 1.); return; }
+      vec3 bg = mix(vec3(.961), vec3(.059), dark);
+      if (n >= 139.) { gl_FragColor = vec4(mix(bg, vec3(.784,.722,.878), .55 - dark * .3), 1.); return; }
       float sn = n - log2(log2(dot(z, z))) + 4.;
       float t = sqrt(sn / 140.);
       vec3 col = pal(t * 2.2 + .15);
       float strength = smoothstep(.02, .45, t);
-      gl_FragColor = vec4(mix(bg, col, strength * .95), 1.);
+      gl_FragColor = vec4(mix(bg, col, strength * (.95 - dark * .3)), 1.);
     }`;
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
   const prog = gl.createProgram();
@@ -47,7 +47,7 @@
   const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
   const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const uRes = gl.getUniformLocation(prog, 'res'), uC = gl.getUniformLocation(prog, 'c'), uZoom = gl.getUniformLocation(prog, 'zoom');
+  const uRes = gl.getUniformLocation(prog, 'res'), uC = gl.getUniformLocation(prog, 'c'), uZoom = gl.getUniformLocation(prog, 'zoom'), uDark = gl.getUniformLocation(prog, 'dark');
 
   const SCALE = 0.6; // render at lower resolution; it's soft anyway
   function resize() {
@@ -79,6 +79,7 @@
       radius += (targetR - radius) * 0.04;
       const cx = radius * Math.cos(angle), cy = radius * Math.sin(angle);
       gl.uniform2f(uC, cx, cy);
+      gl.uniform1f(uDark, document.documentElement.dataset.theme === 'dark' ? 1 : 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       if (out) out.textContent = `c = ${cx.toFixed(3)} ${cy < 0 ? '−' : '+'} ${Math.abs(cy).toFixed(3)}i`;
     }
@@ -87,5 +88,8 @@
   resize();
   addEventListener('resize', resize);
   frame();
-  if (REDUCED) hero.addEventListener('pointermove', () => requestAnimationFrame(frame));
+  if (REDUCED) {
+    hero.addEventListener('pointermove', () => requestAnimationFrame(frame));
+    addEventListener('themechange', () => requestAnimationFrame(frame));
+  }
 })();
