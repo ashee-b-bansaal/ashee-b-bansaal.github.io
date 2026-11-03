@@ -39,7 +39,11 @@ EPIGRAPHS = {  # add a line from your poems here to show it under that section's
 }
 
 EXPERIENCE = [
-    dict(logo="CMU", logo_img="logos/cmu.png", logo_tile=True, venue="Submitting to CVPR’27", role="ML Research Intern", org="Carnegie Mellon University · Semantic Signal Lab",
+    dict(logo="Co", role="Co-Founder", org="Stealth startup",
+         when="Present", where="", now=True,  # EDIT: add a start date and location when you can share them
+         text="Building something new in stealth. More to share soon.",
+         tags=[]),
+    dict(logo="CMU", logo_img="logos/cmu.png", logo_tile=True, venue="Submitting to CVPR’27", role="ML Research Intern", org="Carnegie Mellon University · Semantic Signals Lab", link="https://semanticsignals.com/",
          when="Jun 2026 – Aug 2026", where="Pittsburgh, PA", now=False,
          text="Developed AI visual memory systems for tracking objects across long-form video. Built DINOv2-based identity matching and CUDA/PyTorch GPU pipelines, processing 3,700+ targets in 283 seconds.",
          tags=["Python", "PyTorch", "CUDA", "DINOv2", "Sinkhorn Optimal Transport", "Computer Vision"]),
@@ -47,7 +51,7 @@ EXPERIENCE = [
          when="Aug 2025 – Present", where="Ithaca, NY", now=True,
          text="Building a hands-free brain-computer interface powered by EEG signals. Developed Conv-LSTM attention models achieving 93% classification accuracy and reduced model iteration time from 5 to 2 days.",
          tags=["Python", "PyTorch", "EEGNet", "Conv-LSTM", "Docker", "Kubernetes", "Optuna"]),
-    dict(logo="Sci-Fi", logo_img="logos/cornell.svg", venue="Submitted to CHI’27 (FaceSign)", role="Machine Learning Intern", org="Cornell University · Sci-Fi Lab",
+    dict(logo="Sci-Fi", logo_img="logos/cornell.svg", venue="Submitted to CHI’27 (FaceSign)", role="Machine Learning Intern", org="Cornell University · Sci-Fi Lab", link="https://www.scifilab.org/",
          when="Jun 2025 – Aug 2025", where="Ithaca, NY", now=False,
          text="Developed multimodal deep learning models for wearable gesture recognition. Trained Conformer-CTC models on 6,000+ sequences, achieving 98.9% gesture accuracy.",
          tags=["Python", "PyTorch", "Conformer-CTC", "Multimodal Learning", "Acoustic Sensing", "IMU"]),
@@ -182,21 +186,23 @@ PROJECTS = [
     ),
 ]
 
-HOBBIES = [
-    dict(id="poetry", title="Poetry", icon="quill",
+HOBBIES = [  # note = the little hand-written sticker on the card
+    dict(id="poetry", title="Poetry", icon="quill", note="100 poems, one book",
          text="I write poems, enough of them that they became a book: <em>Silent Voices, Loud Whispers</em>, 100 poems for the journey within.",
          link=("Read the Book", "https://www.amazon.com/dp/8119483065"), tint="peach"),
-    dict(id="music", title="Music", icon="drum",
+    dict(id="music", title="Music", icon="drum", note="new this summer: drums!",
          text="I love playing and learning new instruments. Most recently, I picked up the drums this summer.", link=None, tint="mint"),
-    dict(id="photo", title="Photography", icon="camera",
+    dict(id="photo", title="Photography", icon="camera", note="always carrying a camera",
          text="I take a lot of photos. A few of them ended up on this site.", link=None, tint="sky"),
 ]
 
-SKILLS = [  # (group name, [skills]); each skill shows as a chip
-    ("Languages", ["Python", "C/C++", "Go", "Java", "Kotlin", "JavaScript", "TypeScript", "Swift", "SQL", "Rust", "Solidity", "Bash", "R", "MATLAB"]),
-    ("AI / ML", ["PyTorch", "TensorFlow", "CUDA", "NVIDIA Triton", "scikit-learn", "Keras", "Hugging Face", "LangChain", "LangGraph", "OpenCV"]),
-    ("Systems & Web", ["React", "Node.js", "FastAPI", "REST", "gRPC", "PostgreSQL", "SQLite", "Redis", "Neo4j", "BigQuery", "Firebase"]),
-    ("Infra & Tools", ["AWS", "GCP", "Docker", "Kubernetes", "Linux", "Git", "CI/CD", "ROS", "Pytest", "Claude Code", "Cursor"]),
+SKILLS = [  # (group name, [skills]); each skill shows as a chip with its logo (logos live in icons/)
+    ("Languages", ["Python", "C", "C++", "Java", "Go", "Kotlin", "Swift", "JavaScript", "TypeScript", "SQL", "Rust", "Solidity", "Ruby", "R", "MATLAB", "Bash", "HTML", "CSS"]),
+    ("AI / ML", ["PyTorch", "TensorFlow", "Keras", "CUDA", "NVIDIA Triton", "scikit-learn", "Hugging Face", "LangChain", "LangGraph", "OpenCV", "Pandas", "NumPy", "Matplotlib"]),
+    ("Web & Backend", ["React", "Next.js", "Node.js", "Express", "Tailwind", "FastAPI", "Flask", "Django", "Spring Boot", "REST", "gRPC", "Selenium"]),
+    ("Data & Databases", ["PostgreSQL", "MySQL", "SQLite", "SQL Server", "MongoDB", "Redis", "Neo4j", "Supabase", "Firebase", "BigQuery", "Snowflake", "DuckDB", "Kafka"]),
+    ("Cloud & DevOps", ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "Linux", "Git", "GitHub Actions", "Grafana", "ROS"]),
+    ("Everyday Tools", ["Claude Code", "Cursor", "Postman", "Pytest", "Jira", "Trello", "Excel"]),
 ]
 EDU = "<em>Cornell University</em>, B.S. Computer Science (Honors) · Minor in ECE · GPA 3.85 · May 2028"
 

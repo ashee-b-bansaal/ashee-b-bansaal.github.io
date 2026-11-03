@@ -28,7 +28,7 @@ def bust(html):
             return m.group(0)
         v = hashlib.md5(open(f, "rb").read()).hexdigest()[:8]
         return f'{m.group(1)}="{m.group(2)}?v={v}"'
-    return re.sub(r'(src|href)="((?:photos|logos)/[^"?]+|style\.css|app\.js|favicon\.svg|favicon\.png|apple-touch-icon\.png|resume\.pdf)"', stamp, html)
+    return re.sub(r'(src|href)="((?:photos|logos|icons)/[^"?]+|style\.css|app\.js|favicon\.svg|favicon\.png|apple-touch-icon\.png|resume\.pdf)"', stamp, html)
 
 
 def save(path, html):
@@ -119,6 +119,14 @@ def logo(e, k):
     return f'<span class="logo" aria-hidden="true" data-edit="{k}.logo">{e["logo"]}</span>'
 
 
+def org(e, k):
+    """The org line; with a "link" (e.g. the lab's site) it opens in a new tab."""
+    if not e.get("link"):
+        return f'<p class="org" data-edit="{k}.org">{e["org"]}</p>'
+    return (f'<p class="org"><a class="org-link" href="{e["link"]}" target="_blank" rel="noopener" data-edit-href="{k}.link">'
+            f'<span data-edit="{k}.org">{e["org"]}</span><span class="go" aria-hidden="true">↗</span></a></p>')
+
+
 def experience(num, title, extra_inside_timeline="", title_key=None):
     items = []
     for i, e in enumerate(EXPERIENCE):
@@ -129,7 +137,7 @@ def experience(num, title, extra_inside_timeline="", title_key=None):
             <article class="card exp-card">
               <header class="card-head">
                 {logo(e, k)}
-                <div><h3 data-edit="{k}.role">{e['role']}</h3><p class="org" data-edit="{k}.org">{e['org']}</p>{venue}</div>
+                <div><h3 data-edit="{k}.role">{e['role']}</h3>{org(e, k)}{venue}</div>
               </header>
               <p class="when"><span data-edit="{k}.when">{e['when']}</span> <span data-edit="{k}.where">{e['where']}</span></p>
               <p data-edit="{k}.text">{e['text']}</p>
@@ -164,11 +172,41 @@ def hobbies(num, title, render, title_key=None):
 '''
 
 
+SKILL_ICONS = {  # skill name -> file in icons/ (a skill without one gets a lettered tile)
+    "Python": "python", "C": "c", "C++": "cpp", "Java": "java", "Go": "go", "Kotlin": "kotlin", "Swift": "swift",
+    "JavaScript": "javascript", "TypeScript": "typescript", "SQL": "sql", "Rust": "rust", "Solidity": "solidity",
+    "Ruby": "ruby", "R": "r", "MATLAB": "matlab", "Bash": "bash", "HTML": "html", "CSS": "css",
+    "PyTorch": "pytorch", "TensorFlow": "tensorflow", "Keras": "keras", "CUDA": "nvidia", "NVIDIA Triton": "nvidia",
+    "scikit-learn": "sklearn", "Hugging Face": "huggingface", "LangChain": "langchain", "LangGraph": "langgraph",
+    "OpenCV": "opencv", "Pandas": "pandas", "NumPy": "numpy", "Matplotlib": "matplotlib",
+    "React": "react", "Next.js": "nextjs", "Node.js": "nodejs", "Express": "express", "Tailwind": "tailwind",
+    "FastAPI": "fastapi", "Flask": "flask", "Django": "django", "Spring Boot": "spring", "REST": "rest", "gRPC": "grpc",
+    "Selenium": "selenium", "PostgreSQL": "postgresql", "MySQL": "mysql", "SQLite": "sqlite", "SQL Server": "mssql",
+    "MongoDB": "mongodb", "Redis": "redis", "Neo4j": "neo4j", "Supabase": "supabase", "Firebase": "firebase",
+    "BigQuery": "bigquery", "Snowflake": "snowflake", "DuckDB": "duckdb", "Kafka": "kafka",
+    "AWS": "aws", "GCP": "gcp", "Azure": "azure", "Docker": "docker", "Kubernetes": "kubernetes", "Linux": "linux",
+    "Git": "git", "GitHub Actions": "githubactions", "Grafana": "grafana", "ROS": "ros",
+    "Claude Code": "claude", "Cursor": "cursor", "Postman": "postman", "Pytest": "pytest", "Jira": "jira",
+    "Trello": "trello", "Excel": "excel",
+}
+
+
+def skill_logo(name):
+    f = SKILL_ICONS.get(re.sub(r"<[^>]+>", "", name).replace("&amp;", "&").strip())
+    if f and os.path.exists(os.path.join(ROOT, "icons", f + ".svg")):
+        return f'<img src="icons/{f}.svg" alt="" width="22" height="22" loading="lazy">'
+    return f'<b class="mono-logo">{re.sub(r"[^A-Za-z0-9+#]", "", name)[:2] or "?"}</b>'
+
+
 def skills(num):
-    tints = ["lilac", "mint", "coral", "lime"]
-    chips = lambda i, items: "".join(f'<li data-edit="SKILLS.{i}.1.{j}">{t}</li>' for j, t in enumerate(items))
+    tints = ["lilac", "mint", "coral", "lime", "pink", "cream"]
+    chips = lambda i, items: "".join(
+        f'<li>{skill_logo(t)}<span data-edit="SKILLS.{i}.1.{j}">{t}</span></li>' for j, t in enumerate(items))
     cols = "".join(
-        f'<div class="skill-card tint-{tints[i % len(tints)]}"><h3 data-edit="SKILLS.{i}.0">{name}</h3><ul class="tags">{chips(i, items)}</ul></div>'
+        f'''<div class="skill-card tint-{tints[i % len(tints)]}">
+          <div class="skill-head"><h3 data-edit="SKILLS.{i}.0">{name}</h3><span class="skill-count">{len(items):02d}</span></div>
+          <ul class="skill-list">{chips(i, items)}</ul>
+        </div>'''
         for i, (name, items) in enumerate(SKILLS))
     return f'''
     <section id="skills" class="sec skills-sec">
@@ -185,7 +223,8 @@ def foot(extra_top="", extra_bottom=""):
     return f'''
   <footer class="foot">
     <div class="wrap">{extra_top}
-      <p class="cta"><em>Say hello</em>: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+      <p class="cta"><em>Let’s connect</em>: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+      <p class="cta-row connect"><a class="link-pill" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn ↗</a><a class="link-pill" href="{GITHUB}" target="_blank" rel="noopener">GitHub ↗</a><a class="link-pill" href="mailto:{EMAIL}">Email ↗</a></p>
       <p class="small"><span>It’s <span class="clock">--:--</span> in Ithaca</span></p>
     </div>{extra_bottom}
   </footer>
@@ -212,6 +251,21 @@ def polaroid(src, cap, tint, cls="", style="", pos="50% 50%"):
         <div class="photo tint-{tint}"><img src="{src}" alt="{cap}" width="400" height="400" style="object-position:{pos}" {"" if "drop" in cls else 'loading="lazy" '}onerror="this.remove()"><span class="ph" aria-hidden="true">your photo</span></div>
         <figcaption>{cap}</figcaption>
       </figure>'''
+
+
+def hob_art(h):
+    """The little scene at the top of each hobby card; animates on hover."""
+    icon = f'<span class="hob-icon">{ICONS[h["icon"]]}</span>'
+    if h["id"] == "poetry":
+        return f'''<div class="book"><div class="book-page"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="book-cover"><em>Silent Voices,<br>Loud Whispers</em><small>100 poems</small></div></div>{icon}'''
+    if h["id"] == "music":
+        return f'{icon}<div class="eq">{"<i></i>" * 9}</div>'
+    if h["id"] == "photo":
+        picks = [POLAROIDS[i] for i in (3, 2, 5)]
+        prints = "".join(f'<span class="print"><img src="{p[0]}" alt="" loading="lazy" style="object-position:{p[6]}"></span>' for p in picks)
+        return f'<div class="prints">{prints}</div>{icon}'
+    return icon
 
 
 def build_page():
@@ -252,8 +306,9 @@ def build_page():
     def hob(h):
         k = f"HOBBIES.{HOBBIES.index(h)}"
         link = f'<a class="link-pill" href="{h["link"][1]}" data-edit-href="{k}.link.1"><span data-edit="{k}.link.0">{h["link"][0]}</span> ↗</a>' if h["link"] else ""
-        return f'''          <article class="hob ticket tint-{h['tint']}">
-            <span class="hob-icon" aria-hidden="true">{ICONS[h['icon']]}</span>
+        note = f'<span class="hob-note hand" data-edit="{k}.note">{h["note"]}</span>' if h.get("note") else ""
+        return f'''          <article class="hob ticket tint-{h['tint']} hob-{h['id']}">
+            <div class="hob-art" aria-hidden="true">{hob_art(h)}</div>{note}
             <h3 data-edit="{k}.title">{h['title']}</h3>
             <p data-edit="{k}.text">{h['text']}</p>{link}
           </article>'''
