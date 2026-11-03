@@ -24,7 +24,7 @@ SITE = os.path.dirname(HERE)  # repo root, where the built site lives
 CONTENT = os.path.join(HERE, "content.py")
 PHOTOS = os.path.join(SITE, "photos")
 EDITABLE = {"NAME", "TAGLINE", "ABOUT_HEAD", "ABOUT", "SEEKING", "EPIGRAPHS", "TITLES",
-            "EXPERIENCE", "PROJECTS", "HOBBIES", "SKILLS", "EDU"}
+            "EXPERIENCE", "LEADERSHIP", "SERVICE", "HONORS", "PROJECTS", "HOBBIES", "SKILLS", "EDU"}
 NEW_PROJECT = '''dict(
         name="New project",
         venue="",

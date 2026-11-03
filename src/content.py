@@ -30,6 +30,8 @@ SEEKING = "Looking for <strong>Summer 2027</strong> SWE and ML internships."
 TITLES = {
     "experience": "Where I’ve worked",
     "projects": "Projects Build Log",
+    "leadership": "Leading &amp; giving back",
+    "honors": "Honors &amp; awards",
     "hobbies": "When I’m not coding",
     "skills": "Toolbox",
 }
@@ -43,6 +45,10 @@ EXPERIENCE = [
          when="Summer 2026 – Present", where="", now=True,  # EDIT: add a location if you want one
          text="Co-founded a privacy-first AI social platform built for meaningful conversations and fewer harmful interactions. Built real-time WebSocket infrastructure supporting 5,000+ data streams and brought AI safety inference under 25 ms.",
          tags=["Next.js", "FastAPI", "WebSockets", "PyTorch", "NVIDIA Triton", "Llama 3.2"]),
+    dict(logo="TA", logo_img="logos/cornell.svg", role="Teaching Assistant", org="Cornell University · CS 5780: Introduction to Machine Learning",
+         when="Fall 2026", where="Ithaca, NY", now=True,
+         text="Hold weekly office hours to help students work through machine learning concepts and assignments, and grade homework and exams. About 10 hours a week.",
+         tags=["Machine Learning", "Office Hours", "Grading"]),
     dict(logo="CMU", logo_img="logos/cmu.png", logo_tile=True, venue="Submitting to CVPR’27", role="ML Research Intern", org="Carnegie Mellon University · Semantic Signals Lab", link="https://semanticsignals.com/",
          when="Jun 2026 – Aug 2026", where="Pittsburgh, PA", now=False,
          text="Developed AI visual memory systems for tracking objects across long-form video. Built DINOv2-based identity matching and CUDA/PyTorch GPU pipelines, processing 3,700+ targets in 283 seconds.",
@@ -55,14 +61,44 @@ EXPERIENCE = [
          when="Jun 2025 – Aug 2025", where="Ithaca, NY", now=False,
          text="Developed multimodal deep learning models for wearable gesture recognition. Trained Conformer-CTC models on 6,000+ sequences, achieving 98.9% gesture accuracy.",
          tags=["Python", "PyTorch", "Conformer-CTC", "Multimodal Learning", "Acoustic Sensing", "IMU"]),
+    dict(logo="INFO", logo_img="logos/cornell.svg", role="Course Developer", org="Cornell University · INFO 3450: Human-Computer Interaction Design",
+         when="Jan 2025 – Jun 2025", where="Ithaca, NY", now=False,
+         text="Co-authored HTML/CSS/JavaScript coding assignments with starter code, reference solutions, and grading rubrics. Benchmarked 30+ AI tools and 15+ peer courses to design 8+ Human–AI Interaction and UI/UX modules for ~100 students.",
+         tags=["HTML", "CSS", "JavaScript", "UI/UX", "Human–AI Interaction", "Curriculum Design"]),
     dict(logo="cult", logo_img="logos/cultfit.png", logo_tile=True, role="Software Engineer Intern", org="Cult.fit · Android &amp; Backend",
          when="May 2024 – Jul 2024", where="Bengaluru, India", now=False,  # EDIT: confirm location
          text="Developed wearable integrations and backend systems for a fitness app with 150K monthly users. Built fault-tolerant pipelines processing 500K+ daily events and reduced database query latency by 60%.",
          tags=["Kotlin", "Java", "Android", "Health Connect", "SQLite", "Coroutines", "Firebase", "BigQuery"]),
+]
+
+# ── LEADERSHIP & SERVICE ─────────────────────────────────────────────────────
+#  Same fields as EXPERIENCE. SERVICE is the short list underneath.
+LEADERSHIP = [
     dict(logo="XR", logo_img="logos/cuxr.png", logo_tile=True, role="BCI Sub-team Lead", org="Cornell Extended Reality Project Team",
          when="Jan 2025 – Present", where="Ithaca, NY", now=True,
-         text="Lead a team of six: GitHub Actions CI, code review, and sprint planning, which cut integration bugs by 40%. See the BCI project below.",
+         text="Lead a team of six: GitHub Actions CI, code review, and sprint planning, which cut integration bugs by 40%. See the BCI project above.",
          tags=["Leadership", "CI/CD", "Python"]),
+    dict(logo="IEEE", role="Corporate E-Board", org="IEEE · Cornell University",
+         when="Jan 2025 – Jan 2026", where="Ithaca, NY", now=False,
+         text="",  # EDIT: one line on what you did, e.g. sponsors you brought in or events you ran
+         tags=[]),
+]
+
+SERVICE = [  # (role, what it involved)
+    ("External Reviewer, CHI 2026", "Reviewing submissions in sensing and interaction systems."),
+    ("Invited Panelist, ACSU Undergraduate Research Panel", "Discussing undergraduate research experiences and pathways."),
+]
+
+# ── HONORS & AWARDS ──────────────────────────────────────────────────────────
+HONORS = [  # amount = the big figure on the card
+    dict(title="Bowers Undergraduate Research Experience (BURE) Scholarship", org="Cornell University", amount="$7,000",
+         text="Research stipend, plus continued support through the BURE Academic Year Expansion Program."),
+    dict(title="Summer Experiential Grant", org="Cornell University", amount="$6,000",
+         text="Awarded to support summer research in 2026."),
+    dict(title="Foreign Student Scholarship", org="Cornell University", amount="~$100K / yr",
+         text="Institutional support of about $100,000 per year."),
+    dict(title="Meritorious Student Scholarship", org="Government of India", amount="$1,500",
+         text="Awarded for achieving <strong>All India Rank 1</strong> in the national secondary school examinations."),
 ]
 
 # ── PROJECTS ─────────────────────────────────────────────────────────────────

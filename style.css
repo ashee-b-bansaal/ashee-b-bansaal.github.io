@@ -372,6 +372,35 @@ body.no-webgl .hero { background: var(--bg); }
 .hob-photo .hob-icon svg { width: 26px; height: 26px; }
 .hob-photo:hover .hob-icon svg { transform: rotate(-12deg) scale(1.1); }
 
+/* leadership: two taped role cards, then a short service list */
+.lead-grid { list-style: none; margin: 0 auto; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 1080px; align-items: start; }
+.lead-item:nth-child(odd) .exp-card { rotate: -.6deg; } .lead-item:nth-child(even) .exp-card { rotate: .7deg; }
+.lead-item .exp-card { position: relative; }
+.lead-item .exp-card::before { content: ""; position: absolute; top: -11px; left: 50%; width: 80px; height: 22px; translate: -50% 0; rotate: 2deg;
+  background: color-mix(in srgb, var(--mint) 85%, transparent); }
+.lead-item:nth-child(2) .exp-card::before { background: color-mix(in srgb, var(--lilac) 80%, transparent); rotate: -3deg; }
+.lead-item .logo:not(.has-img) { font-size: 10px; }
+.service { max-width: 1080px; margin: 44px auto 0; }
+.service h3 { font-size: 26px; font-weight: 400; margin: 0 0 14px; rotate: -2deg; display: inline-block; }
+.service ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.service li { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: 14px; background: var(--surface); border: 1px dashed var(--hair-strong); }
+.service b { font-weight: 600; font-size: 16px; }
+.service span { color: var(--body); font-size: 15px; line-height: 1.5; }
+@media (max-width: 800px) { .lead-grid, .service ul { grid-template-columns: 1fr; } }
+
+/* honors: tinted award cards with the amount up top */
+.honors-sec .wrap { max-width: 1280px; }
+.honor-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.honor { position: relative; border-radius: 18px; padding: 26px 24px 24px; display: flex; flex-direction: column;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1.2), box-shadow .3s; }
+.honor:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,.1); }
+.honor-amount { font: 340 clamp(30px, 3vw, 40px)/1 var(--display); letter-spacing: -0.03em; margin: 0 0 18px; padding-bottom: 16px; border-bottom: 1px dashed rgba(0,0,0,.25); }
+.honor h3 { font-size: 18px; font-weight: 600; line-height: 1.3; margin: 0 0 4px; }
+.honor-org { font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(0,0,0,.6); margin: 0 0 12px; }
+.honor p:last-child { margin: 0; font-size: 15px; line-height: 1.55; color: #222; }
+@media (max-width: 1100px) { .honor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .honor-grid { grid-template-columns: 1fr; } }
+
 /* skills: tinted cards of logo chips */
 .skills-sec .wrap { max-width: 1400px; }
 .skills { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; border-top: none; padding-top: 0; margin: 0 auto; align-items: stretch; }
@@ -424,3 +453,9 @@ body.no-webgl .hero { background: var(--bg); }
 /* footer: let's connect */
 .foot .cta { margin-bottom: 16px; }
 .foot .connect { margin: 0 0 40px; }
+
+/* six nav links don't fit a phone: let the row scroll sideways */
+@media (max-width: 560px) {
+  .nav-links { min-width: 0; overflow-x: auto; scrollbar-width: none; justify-content: flex-start !important; white-space: nowrap; }
+  .nav-links::-webkit-scrollbar { display: none; }
+}

@@ -76,6 +76,8 @@ def nav(name_html):
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#honors">Awards</a></li>
       <li><a href="#hobbies">Hobbies</a></li>
     </ul>
   </nav>
@@ -127,22 +129,26 @@ def org(e, k):
             f'<span data-edit="{k}.org">{e["org"]}</span><span class="go" aria-hidden="true">↗</span></a></p>')
 
 
-def experience(num, title, extra_inside_timeline="", title_key=None):
-    items = []
-    for i, e in enumerate(EXPERIENCE):
-        k = f"EXPERIENCE.{i}"
-        tags = "".join(f'<li data-edit="{k}.tags.{j}">{t}</li>' for j, t in enumerate(e["tags"]))
-        venue = f'<p class="venue" data-edit="{k}.venue">{e["venue"]}</p>' if e.get("venue") else ""
-        items.append(f'''          <li class="t-item{' is-now' if e['now'] else ''}">
-            <article class="card exp-card">
+def exp_card(e, k):
+    """One role card (used by Experience and Leadership); empty text or tags are left out."""
+    tags = "".join(f'<li data-edit="{k}.tags.{j}">{t}</li>' for j, t in enumerate(e["tags"]))
+    venue = f'<p class="venue" data-edit="{k}.venue">{e["venue"]}</p>' if e.get("venue") else ""
+    text = f'\n              <p data-edit="{k}.text">{e["text"]}</p>' if e.get("text") else ""
+    tags = f'\n              <ul class="tags">{tags}</ul>' if tags else ""
+    return f'''<article class="card exp-card">
               <header class="card-head">
                 {logo(e, k)}
                 <div><h3 data-edit="{k}.role">{e['role']}</h3>{org(e, k)}{venue}</div>
               </header>
-              <p class="when"><span data-edit="{k}.when">{e['when']}</span> <span data-edit="{k}.where">{e['where']}</span></p>
-              <p data-edit="{k}.text">{e['text']}</p>
-              <ul class="tags">{tags}</ul>
-            </article>
+              <p class="when"><span data-edit="{k}.when">{e['when']}</span> <span data-edit="{k}.where">{e['where']}</span></p>{text}{tags}
+            </article>'''
+
+
+def experience(num, title, extra_inside_timeline="", title_key=None):
+    items = []
+    for i, e in enumerate(EXPERIENCE):
+        items.append(f'''          <li class="t-item{' is-now' if e['now'] else ''}">
+            {exp_card(e, f"EXPERIENCE.{i}")}
           </li>''')
     return f'''
     <section id="experience" class="sec exp-sec">
@@ -153,6 +159,47 @@ def experience(num, title, extra_inside_timeline="", title_key=None):
 {chr(10).join(items)}
         </ol>
         </div>
+      </div>
+    </section>
+'''
+
+
+def leadership(num):
+    cards = "\n".join(f'          <li class="lead-item">{exp_card(e, f"LEADERSHIP.{i}")}</li>' for i, e in enumerate(LEADERSHIP))
+    service = "".join(
+        f'''<li><b data-edit="SERVICE.{i}.0">{role}</b><span data-edit="SERVICE.{i}.1">{text}</span></li>'''
+        for i, (role, text) in enumerate(SERVICE))
+    return f'''
+    <section id="leadership" class="sec lead-sec">
+      <div class="wrap">
+        {section_head(num, TITLES["leadership"], "leadership", title_key="leadership")}
+        <ul class="lead-grid">
+{cards}
+        </ul>
+        <div class="service">
+          <h3 class="hand">also: service</h3>
+          <ul>{service}</ul>
+        </div>
+      </div>
+    </section>
+'''
+
+
+def honors(num):
+    tints = ["lilac", "mint", "coral", "lime"]
+    cards = "\n".join(f'''          <li class="honor tint-{tints[i % len(tints)]}">
+            <p class="honor-amount" data-edit="HONORS.{i}.amount">{h['amount']}</p>
+            <h3 data-edit="HONORS.{i}.title">{h['title']}</h3>
+            <p class="honor-org" data-edit="HONORS.{i}.org">{h['org']}</p>
+            <p data-edit="HONORS.{i}.text">{h['text']}</p>
+          </li>''' for i, h in enumerate(HONORS))
+    return f'''
+    <section id="honors" class="sec honors-sec">
+      <div class="wrap">
+        {section_head(num, TITLES["honors"], "honors", title_key="honors")}
+        <ul class="honor-grid">
+{cards}
+        </ul>
       </div>
     </section>
 '''
@@ -349,8 +396,10 @@ def build_page():
       </div>
     </section>
 '''
-    html += hobbies("03 — Off the clock", TITLES["hobbies"], hob, title_key="hobbies")
-    html += skills("04 — Toolbox")
+    html += leadership("03 — Leadership")
+    html += honors("04 — Recognition")
+    html += hobbies("05 — Off the clock", TITLES["hobbies"], hob, title_key="hobbies")
+    html += skills("06 — Toolbox")
     html += "  </main>"
     html += foot(extra_top='\n      <p class="hand sign">— ashee</p>')
     save(os.path.join(ROOT, "index.html"), html)
