@@ -201,7 +201,7 @@ PROJECTS = [
             "Designed and built the React/TypeScript front end: search, Ask AI, evidence cards, saved professors, history and test accounts.",
         ],
         tags=["Python", "FastAPI", "RAG", "Embeddings", "Vector Search", "Ranking", "LLMs", "React", "TypeScript", "Vite", "Docker"],
-        details=[("Partner", "Chief, Division of Plastic &amp; Reconstructive Surgery, Weill Cornell Medicine"), ("Team", "5 students, Cornell AI Innovation Lab")],
+        details=[("Partner", "Chief, Division of Plastic &amp; Reconstructive Surgery, Weill Cornell Medicine"), ("Team", "Collaborated with a team of 5 people at Cornell’s AI Innovation Lab")],
         buttons=[],
     ),
     dict(
