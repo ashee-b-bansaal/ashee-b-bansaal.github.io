@@ -188,6 +188,23 @@ PROJECTS = [
         focus="50% 50%",
     ),
     dict(
+        name="BME Collaborator Finder",
+        venue="",
+        subtitle="AI Research-Partner Search for Weill Cornell Medicine",
+        link="#",
+        image="photos/collaborator-finder.jpg",
+        fit="cover", focus="50% 40%",
+        text="A clinician describes what they want to build, in plain words, and gets back the Cornell biomedical engineering faculty who could help build it, each with the papers that prove the fit. Built with Cornell’s AI Innovation Lab in collaboration with the Chief of the Division of Plastic and Reconstructive Surgery at Weill Cornell Medicine.",
+        built=[
+            "Built the backend for “Ask AI”: a FastAPI chat service whose answers must cite the papers behind every name, with uncited references stripped and unseen names flagged.",
+            "Tuned the embedding-based, three-tier ranking pipeline (papers → passages → people) on a held-out set, raising recall@10 from 0.74 to 0.84 and cutting unreturned matches from 9 to 1; found that prolific authors win on max similarity and proposed a fix.",
+            "Designed and built the React/TypeScript front end: search, Ask AI, evidence cards, saved professors, history and test accounts.",
+        ],
+        tags=["Python", "FastAPI", "RAG", "Embeddings", "Vector Search", "Ranking", "LLMs", "React", "TypeScript", "Vite", "Docker"],
+        details=[("Partner", "Chief, Division of Plastic &amp; Reconstructive Surgery, Weill Cornell Medicine"), ("Team", "5 students, Cornell AI Innovation Lab")],
+        buttons=[],
+    ),
+    dict(
         name="CalibraType",
         venue="Submitting to IUI’27",
         subtitle="Real-world Adaptive Mobile Keyboard",
