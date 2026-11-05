@@ -131,6 +131,14 @@ def org(e, k):
             f'<span data-edit="{k}.org">{e["org"]}</span><span class="go" aria-hidden="true">↗</span></a></p>')
 
 
+def built(e, k):
+    """The "What I built" toggle: 2–3 bullets under the one-line summary."""
+    items = "".join(f'<li data-edit="{k}.built.{j}">{b}</li>' for j, b in enumerate(e.get("built", [])))
+    if not items:
+        return ""
+    return f'<details class="built"><summary>{e.get("built_label", "What I built")}</summary><ul>{items}</ul></details>'
+
+
 def exp_card(e, k):
     """One role card (used by Experience and Leadership); empty text or tags are left out."""
     tags = "".join(f'<li data-edit="{k}.tags.{j}">{t}</li>' for j, t in enumerate(e["tags"]))
@@ -144,7 +152,7 @@ def exp_card(e, k):
                 {logo(e, k)}
                 <div><h3 data-edit="{k}.role">{e['role']}</h3>{org(e, k)}{venue}</div>
               </header>
-              {when}{text}{tags}
+              {when}{text}{built(e, k)}{tags}
             </article>'''
 
 
@@ -348,6 +356,7 @@ def build_page():
             <p class="venue{empty(p.get('venue'))}" data-edit="{k}.venue">{p.get('venue', '')}</p>
             {art}
             <p class="desc" data-edit="{k}.text">{p['text']}</p>
+            {built(p, k)}
             <ul class="tags ptags">{tags}</ul>
             <div class="details">{details}</div>
             {f'<div class="proj-links">{buttons}</div>' if buttons else ''}

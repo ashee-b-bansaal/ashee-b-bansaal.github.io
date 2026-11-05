@@ -75,7 +75,7 @@ strong { font-weight: 600; }
 .card { background: var(--card); border: 1px solid var(--hair); border-radius: var(--r-card); padding: 24px 26px; transition: transform .25s ease, box-shadow .25s ease, border-color .25s; }
 .card p { color: var(--body); font-size: 15.5px; line-height: 1.6; margin: 0 0 14px; }
 .card-head { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
-.logo { flex: none; width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; font: 500 12px/1 var(--mono); background: var(--surface); color: var(--ink); text-align: center; }
+.logo { flex: none; width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; font: 500 13px/1 var(--mono); background: var(--surface); color: var(--ink); text-align: center; }
 .exp-card h3 { font-size: 19px; }
 .org { margin: 2px 0 0 !important; font-size: 14px !important; }
 .when { font: 400 12px/1.4 var(--mono) !important; color: var(--muted) !important; display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--hair); }

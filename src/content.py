@@ -41,33 +41,63 @@ EPIGRAPHS = {  # add a line from your poems here to show it under that section's
 }
 
 EXPERIENCE = [
-    dict(logo="ICTA", role="Co-Founder", org="I Can’t Tell Anyone",
-         when="Summer 2026 – Present", where="", now=True,  # EDIT: add a location if you want one
-         text="Co-founded a privacy-first AI social platform built for meaningful conversations and fewer harmful interactions. Built real-time WebSocket infrastructure supporting 5,000+ data streams and brought AI safety inference under 25 ms.",
-         tags=["Next.js", "FastAPI", "WebSockets", "PyTorch", "NVIDIA Triton", "Llama 3.2"]),
     dict(logo="TA", logo_img="logos/cornell.svg", role="Teaching Assistant", org="Cornell University · CS 5780: Introduction to Machine Learning",
          when="Fall 2026", where="Ithaca, NY", now=True,
-         text="Hold weekly office hours to help students work through machine learning concepts and assignments, and grade homework and exams. About 10 hours a week.",
+         text="Teaching assistant for CS 5780, Cornell’s introduction to machine learning.",
+         built=[
+             "Hold weekly office hours to help students work through machine learning concepts and assignments.",
+             "Grade homework and exams, about 10 hours a week in total.",
+         ], built_label="What I do",
          tags=["Machine Learning", "Office Hours", "Grading"]),
     dict(logo="CMU", logo_img="logos/cmu.png", logo_tile=True, venue="Submitting to CVPR’27", role="ML Research Intern", org="Carnegie Mellon University · Semantic Signals Lab", link="https://semanticsignals.com/",
          when="Jun 2026 – Aug 2026", where="Pittsburgh, PA", now=False,
-         text="Developed AI visual memory systems for tracking objects across long-form video. Built DINOv2-based identity matching and CUDA/PyTorch GPU pipelines, processing 3,700+ targets in 283 seconds.",
+         text="Research on AI visual memory: systems that keep track of objects across long-form video.",
+         built=[
+             "Built DINOv2-based identity matching, using Sinkhorn optimal transport to pair targets.",
+             "Wrote CUDA/PyTorch GPU pipelines that process 3,700+ targets in 283 seconds.",
+         ],
          tags=["Python", "PyTorch", "CUDA", "DINOv2", "Sinkhorn Optimal Transport", "Computer Vision"]),
+    dict(logo="ICTA", role="Co-Founder", org="I Can’t Tell Anyone",
+         when="Summer 2026 – Present", where="", now=True,  # EDIT: add a location if you want one
+         text="Co-founded a privacy-first AI social platform built for meaningful conversations and fewer harmful interactions.",
+         built=[
+             "Built real-time WebSocket infrastructure supporting 5,000+ data streams.",
+             "Brought AI safety inference under 25 ms, serving Llama 3.2 on NVIDIA Triton.",
+             "Shipped the product end to end with a Next.js frontend and FastAPI backend.",
+         ],
+         tags=["Next.js", "FastAPI", "WebSockets", "PyTorch", "NVIDIA Triton", "Llama 3.2"]),
     dict(logo="C", role="Founder &amp; ML Engineer", org="Cognify",
          when="Aug 2025 – Present", where="Ithaca, NY", now=True,
-         text="Building a hands-free brain-computer interface powered by EEG signals. Developed Conv-LSTM attention models achieving 93% classification accuracy and reduced model iteration time from 5 to 2 days.",
+         text="A hands-free brain-computer interface powered by EEG signals.",
+         built=[
+             "Developed Conv-LSTM attention models that reach 93% classification accuracy.",
+             "Cut model iteration time from 5 days to 2.",
+         ],
          tags=["Python", "PyTorch", "EEGNet", "Conv-LSTM", "Docker", "Kubernetes", "Optuna"]),
     dict(logo="Sci-Fi", logo_img="logos/cornell.svg", venue="Submitted to CHI’27 (FaceSign)", role="Machine Learning Intern", org="Cornell University · Sci-Fi Lab", link="https://www.scifilab.org/",
          when="Jun 2025 – Aug 2025", where="Ithaca, NY", now=False,
-         text="Developed multimodal deep learning models for wearable gesture recognition. Trained Conformer-CTC models on 6,000+ sequences, achieving 98.9% gesture accuracy.",
+         text="Multimodal deep learning for gesture recognition on wearables.",
+         built=[
+             "Trained Conformer-CTC models on 6,000+ sequences, reaching 98.9% gesture accuracy.",
+             "Fused acoustic and IMU motion signals into a single multimodal model.",
+         ],
          tags=["Python", "PyTorch", "Conformer-CTC", "Multimodal Learning", "Acoustic Sensing", "IMU"]),
     dict(logo="INFO", logo_img="logos/cornell.svg", role="Course Developer", org="Cornell University · INFO 3450: Human-Computer Interaction Design",
          when="Jan 2025 – Jun 2025", where="Ithaca, NY", now=False,
-         text="Co-authored HTML/CSS/JavaScript coding assignments with starter code, reference solutions, and grading rubrics. Benchmarked 30+ AI tools and 15+ peer courses to design 8+ Human–AI Interaction and UI/UX modules for ~100 students.",
+         text="Helped build Cornell’s INFO 3450 course on Human-Computer Interaction Design, taken by ~100 students.",
+         built=[
+             "Co-authored HTML/CSS/JavaScript coding assignments with starter code, reference solutions, and grading rubrics.",
+             "Benchmarked 30+ AI tools and 15+ peer courses to design 8+ Human–AI Interaction and UI/UX modules.",
+         ], built_label="What I did",
          tags=["HTML", "CSS", "JavaScript", "UI/UX", "Human–AI Interaction", "Curriculum Design"]),
     dict(logo="cult", logo_img="logos/cultfit.png", logo_tile=True, role="Software Engineer Intern", org="Cult.fit · Android &amp; Backend",
          when="May 2024 – Jul 2024", where="Bengaluru, India", now=False,  # EDIT: confirm location
-         text="Developed wearable integrations and backend systems for a fitness app with 150K monthly users. Built fault-tolerant pipelines processing 500K+ daily events and reduced database query latency by 60%.",
+         text="Android and backend engineering for a fitness app with 150K monthly users.",
+         built=[
+             "Built wearable integrations on Android with Kotlin and Health Connect.",
+             "Built fault-tolerant pipelines that process 500K+ daily events.",
+             "Reduced database query latency by 60%.",
+         ],
          tags=["Kotlin", "Java", "Android", "Health Connect", "SQLite", "Coroutines", "Firebase", "BigQuery"]),
 ]
 
@@ -114,7 +144,8 @@ HONORS = [  # big = the headline figure (it counts up on screen); label = the sm
 #    fit       "contain" shows the whole image (best for app screenshots),
 #              "cover" fills the box and crops (best for photos)
 #    focus     with "cover": which part to keep, e.g. "50% 20%" = keep the top
-#    text      the paragraph
+#    text      one line: what the project is
+#    built     2–3 short bullets of what you built, shown under a "What I built" toggle
 #    tags      the skill chips, e.g. ["Python", "PyTorch"]
 #    details   extra lines under the tags, as ("Label", "value") pairs, e.g. ("Team", "…")
 #    buttons   small link buttons at the bottom, as ("Label", "url") pairs
@@ -126,7 +157,12 @@ PROJECTS = [
         link="#",
         image="photos/ar-cafe-conversation-interface.png",
         fit="cover", focus="75% 62%",
-        text="An AR interface enabling real-time communication between Deaf, hard-of-hearing, and hearing users. Built a 7-task asynchronous AI pipeline with sub-second latency and 95%+ gesture recognition accuracy.",
+        text="An AR interface for real-time conversation between Deaf, hard-of-hearing, and hearing users.",
+        built=[
+            "Built a 7-task asynchronous AI pipeline with sub-second latency.",
+            "Reached 95%+ gesture recognition accuracy with on-device TensorFlow Lite and MediaPipe.",
+            "Connected speech in and out with Whisper ASR, GPT-4o-mini, and Azure TTS.",
+        ],
         tags=["Python", "Asyncio", "TensorFlow Lite", "On-Device ML", "MediaPipe", "Computer Vision", "Whisper ASR", "GPT-4o-mini", "Azure TTS", "Real-Time Systems"],
         details=[("Team", "Co-built with another developer")],
         buttons=[("GitHub", "https://github.com/ashee-b-bansaal/Select-or-Sign-AI-powered-AR-glass-interface-.git"), ("Poster", "https://yourimageshare.com/ib/TU3qqC6SM9.png"), ("Demo Video", "https://youtu.be/lZsJfs5ApfI?si=pSJ_sRxYps5A_zno")],
@@ -138,7 +174,11 @@ PROJECTS = [
         link="#",
         image="photos/i-cant-tell-anyone.jpg",
         fit="cover",
-        text="A social platform designed to encourage meaningful conversations and reduce harmful interactions. Built a real-time WebSocket infrastructure supporting 5,000+ data streams and optimized AI safety inference to under 25 ms.",
+        text="A social platform designed to encourage meaningful conversations and reduce harmful interactions.",
+        built=[
+            "Built real-time WebSocket infrastructure supporting 5,000+ data streams.",
+            "Optimized AI safety inference to under 25 ms with ONNX INT8 quantization on NVIDIA Triton.",
+        ],
         tags=["React", "Next.js", "Python", "FastAPI", "WebSockets", "PyTorch", "ONNX", "INT8 Quantization", "NVIDIA Triton", "LLM Inference", "Llama 3.2", "Docker"],
         details=[("Team", "Co-built with another developer")],
         buttons=[("Demo Video", "https://youtu.be/d6EKJWPPSjk")],
@@ -151,7 +191,11 @@ PROJECTS = [
         link="#",
         image="photos/calibratype.jpg",
         fit="cover",
-        text="An iOS keyboard that automatically adapts to how users type. Built a C++ probabilistic learning engine that continuously adjusts touch predictions, reducing typing errors by 28%.",
+        text="An iOS keyboard that automatically adapts to how each person types.",
+        built=[
+            "Built a C++ probabilistic learning engine that continuously adjusts touch predictions on-device.",
+            "Reduced typing errors by 28%.",
+        ],
         tags=["C++", "Swift", "iOS", "UIKit", "Online Learning", "Probabilistic Modeling", "On-Device ML"],
         details=[("Team", "Co-building with 2 other developers")],
         buttons=[("GitHub", "https://github.com/JimmyChen02/ios-typing-data-collector")],
@@ -164,7 +208,11 @@ PROJECTS = [
         link="https://kommodo.ai/i/aLtOEzaXE31cF5kimyjV",
         image="photos/facesign.jpg",
         fit="cover",
-        text="A smart-glasses system that recognizes sign language gestures and facial expressions. Developed a multimodal Conformer-CTC model combining acoustic and motion sensors, achieving 98.9% gesture accuracy and 97.4% facial-expression F1.",
+        text="A smart-glasses system that recognizes sign language gestures and facial expressions.",
+        built=[
+            "Developed a multimodal Conformer-CTC model combining acoustic and motion sensors.",
+            "Reached 98.9% gesture accuracy and 97.4% facial-expression F1.",
+        ],
         tags=["Python", "PyTorch", "Conformer-CTC", "CNNs", "Multimodal Learning", "Multitask Learning", "Sensor Fusion", "Signal Processing", "Acoustic Sensing", "IMU"],
         details=[],
         buttons=[("Demo Video", "https://youtu.be/iAjPd3CNK30"), ("Concept", "https://yourimageshare.com/ib/ulscpG3rD8.png")],
@@ -177,7 +225,12 @@ PROJECTS = [
         link="#",
         image="photos/legal-eagle.jpg",
         fit="cover",
-        text="An AI platform that transforms complex legal documents into conversational podcasts. Built a multi-agent RAG pipeline that reduced hallucinations by 35% and LLM token costs by 98.5%.",
+        text="An AI platform that turns complex legal documents into conversational podcasts.",
+        built=[
+            "Built a multi-agent RAG pipeline with LangGraph and Pinecone vector search.",
+            "Reduced hallucinations by 35%.",
+            "Cut LLM token costs by 98.5%.",
+        ],
         tags=["Python", "LangGraph", "Multi-Agent Systems", "RAG", "Pinecone", "Vector Search", "LLMs", "LLM Evaluation", "Redis", "JavaScript"],
         details=[("Team", "Co-built with another developer")],
         buttons=[("Demo Video", "https://youtu.be/ReSZEn3ARvg")],
@@ -190,7 +243,11 @@ PROJECTS = [
         link="#",
         image="photos/cuxr-bci.jpg",
         fit="cover", focus="50% 22%",
-        text="Our sub-team streams EEG at 256 Hz into a real-time inference pipeline built on FFT spectral features (82% accuracy across 20+ users), so XR experiences can respond to the person wearing the headset. I lead six engineers and set up our CI, code review, and sprint process, which cut integration bugs by 40%.",
+        text="Live EEG inference, so XR experiences can respond to the person wearing the headset.",
+        built=[
+            "Streamed EEG at 256 Hz into a real-time inference pipeline built on FFT spectral features, with 82% accuracy across 20+ users.",
+            "Lead six engineers, and set up our CI, code review, and sprint process, which cut integration bugs by 40%.",
+        ],
         tags=["Python", "scikit-learn", "PyTorch", "EEGNet", "SciPy", "NumPy", "Signal Processing", "Common Spatial Patterns (CSP)", "Real-Time ML Inference", "WebSockets", "Unity", "Meta Quest", "GitHub Actions"],
         details=[("Team", "Sub-team lead · 6 engineers")],
         buttons=[("GitHub", "https://github.com/CUXR/BCI-VR-Navigation.git"), ("Demo Video 1", "https://www.youtube.com/watch?v=tk2hOVV74W4"), ("Demo Video 2", "https://www.youtube.com/watch?v=xWrw_kHVDX8")],
@@ -202,7 +259,11 @@ PROJECTS = [
         link="#",
         image="photos/spatial-moves.jpg",
         fit="cover",
-        text="A web platform that visualizes personalized learning paths as interactive knowledge graphs. Built React/D3.js visualizations and vector-search services supporting 100+ adaptive learning nodes.",
+        text="A web platform that shows personalized learning paths as interactive knowledge graphs.",
+        built=[
+            "Built interactive React/D3.js graph visualizations.",
+            "Built vector-search services supporting 100+ adaptive learning nodes.",
+        ],
         tags=["React", "TypeScript", "D3.js", "Node.js", "Python", "FAISS", "Pinecone", "Vector Search", "Neo4j", "Graph Databases", "Data Visualization"],
         details=[],
         buttons=[("GitHub", "#")],
@@ -215,7 +276,12 @@ PROJECTS = [
         link="https://pages.github.coecis.cornell.edu/ece3140-spr2026/ab3235-svo8/",
         image="photos/airdrum-duel.jpg",
         fit="cover",
-        text="A two-player rhythm game that turns mid-air gestures into virtual drum beats using motion-sensing microcontrollers. Built a 6-stage concurrent embedded pipeline with IMU gesture classification, earliest-deadline-first scheduling, and 10 ms sensor sampling for responsive gameplay.",
+        text="A two-player rhythm game that turns mid-air gestures into virtual drum beats, using motion-sensing microcontrollers.",
+        built=[
+            "Built a 6-stage concurrent embedded pipeline on an ARM Cortex-M0+.",
+            "Classified IMU gestures from sensors sampled every 10 ms.",
+            "Used earliest-deadline-first scheduling to keep gameplay responsive.",
+        ],
         tags=["Embedded C", "ARM Assembly", "ARM Cortex-M0+", "FRDM-KL46Z", "Real-Time Scheduling (EDF)", "Concurrency", "Interrupt Handling", "IMU Sensors", "UART", "Hardware Timers"],
         details=[("Team", "Co-built with another developer")],
         buttons=[("Demo Video", "https://youtu.be/6LhgXgnIcNo"), ("GitHub", "https://pages.github.coecis.cornell.edu/ece3140-spr2026/ab3235-svo8/")],
