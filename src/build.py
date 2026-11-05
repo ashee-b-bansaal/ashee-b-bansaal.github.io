@@ -214,7 +214,7 @@ def honors(num):
 '''
 
 
-def hobbies(num, title, render, title_key=None):
+def hobbies(num, title, render, title_key=None, after=""):
     rows = "\n".join(render(h) for h in HOBBIES)
     return f'''
     <section id="hobbies" class="sec hob-sec">
@@ -223,7 +223,7 @@ def hobbies(num, title, render, title_key=None):
         <div class="hob-list">
 {rows}
         </div>
-      </div>
+      </div>{after}
     </section>
 '''
 
@@ -301,6 +301,37 @@ POLAROIDS = [  # (photo file, caption, x%, y%, rotation, tint, focal point); pho
     ("photos/dessert.jpg", "dessert first", 22, 74, -3, "pink", "50% 55%"),
     ("photos/magnolia.jpg", "magnolia season", 62, 76, 8, "cream", "50% 72%"),
 ]
+
+CAMERA_ROLL = [  # (photo file, caption, focal point): the strip of polaroids under the hobbies
+    ("photos/golden-hour.jpg", "chasing golden hour", "50% 40%"),
+    ("photos/momos.jpg", "momos taste like home", "50% 70%"),
+    ("photos/xr.jpg", "beta-testing other worlds", "50% 30%"),
+    ("photos/window-skyline.jpg", "a window full of city", "50% 50%"),
+    ("photos/bunny.jpg", "chief cuddle officer", "50% 45%"),
+    ("photos/hot-chocolate.jpg", "hot chocolate, then comedy", "50% 45%"),
+    ("photos/yellow-flowers.jpg", "stopping for the flowers", "50% 30%"),
+    ("photos/ludo.jpg", "team blue, undefeated", "50% 50%"),
+    ("photos/pasta.jpg", "pasta is a love language", "50% 60%"),
+    ("photos/sos.jpg", "poster day, all smiles", "50% 40%"),
+    ("photos/lake-sunset.jpg", "the sky did that", "50% 45%"),
+    ("photos/ice-cream.jpg", "a scoop per deadline", "50% 55%"),
+    ("photos/walk-home.jpg", "sunset on the walk home", "50% 40%"),
+    ("photos/ramen.jpg", "slurp responsibly", "50% 50%"),
+    ("photos/pink-drink.jpg", "pink is a flavor", "50% 55%"),
+    ("photos/tikka.jpg", "tikka by firelight", "50% 50%"),
+]
+
+
+def camera_roll():
+    """A slow, endless strip of polaroids; hover pauses it. The second copy only exists to make the loop seamless."""
+    tints = ["lime", "lilac", "coral", "mint", "pink", "cream"]
+    tilts = [-4, 3, -2, 5, -3, 2]
+    figs = "".join(polaroid(s, c, tints[i % 6], "roll-item", f"--r:{tilts[i % 6]}deg", pos) for i, (s, c, pos) in enumerate(CAMERA_ROLL))
+    return f'''
+      <div class="roll" role="region" aria-label="Camera roll" tabindex="0">
+        <p class="roll-head hand">from the camera roll</p>
+        <div class="roll-track"><div class="roll-set">{figs}</div><div class="roll-set" aria-hidden="true">{figs}</div></div>
+      </div>'''
 
 
 def polaroid(src, cap, tint, cls="", style="", pos="50% 50%"):
@@ -414,7 +445,7 @@ def build_page():
 '''
     html += leadership("03 — Leadership")
     html += honors("04 — Recognition")
-    html += hobbies("05 — Off the clock", TITLES["hobbies"], hob, title_key="hobbies")
+    html += hobbies("05 — Off the clock", TITLES["hobbies"], hob, title_key="hobbies", after=camera_roll())
     html += skills("06 — Toolbox")
     html += "  </main>"
     html += foot(extra_top='\n      <p class="hand sign">— ashee</p>')

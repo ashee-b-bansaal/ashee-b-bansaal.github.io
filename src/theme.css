@@ -199,6 +199,23 @@ body.no-webgl .hero { background: var(--bg); }
 .hob-row:hover .blob { transform: scale(1.08); }
 .hob-art .hob-icon svg { width: 40px; height: 40px; margin: 0; transition: transform .4s cubic-bezier(.2,.8,.2,1.4); }
 
+/* camera roll: an endless strip of polaroids under the hobbies; hover pauses it */
+.roll { margin-top: clamp(56px, 8vw, 96px); overflow: hidden; outline: none; }
+.roll-head { margin: 0 0 8px; text-align: center; font-size: 26px; color: var(--muted); transform: rotate(-2deg); }
+.roll-track { display: flex; width: max-content; animation: roll 110s linear infinite; }
+.roll:hover .roll-track, .roll:focus-within .roll-track, .roll:focus .roll-track { animation-play-state: paused; }
+.roll-set { display: flex; gap: clamp(22px, 3vw, 40px); padding: 26px clamp(11px, 1.5vw, 20px) 34px; }
+.roll-item { width: clamp(160px, 15vw, 210px); flex: none; rotate: var(--r); transition: rotate .35s cubic-bezier(.2,.8,.2,1.3), scale .35s cubic-bezier(.2,.8,.2,1.3), box-shadow .35s; }
+.roll-item:hover { rotate: 0deg; scale: 1.08; z-index: 1; box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 22px 40px rgba(0,0,0,.18); }
+.roll-item .photo { aspect-ratio: 4 / 5; }
+.roll-item figcaption { font-size: 18px; line-height: 1.15; padding: 12px 6px 14px; color: #333; }
+@keyframes roll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .roll { overflow-x: auto; }
+  .roll-track { animation: none; }
+  .roll-set[aria-hidden] { display: none; }
+}
+
 /* poetry: the book opens */
 .hob-poetry .hob-art > .hob-icon { position: absolute; right: 18%; top: 34px; rotate: 14deg; }
 .hob-poetry .hob-icon svg { width: 52px; height: 52px; }
