@@ -125,14 +125,14 @@ LEADERSHIP = [
 
 # ── HONORS & AWARDS ──────────────────────────────────────────────────────────
 HONORS = [  # big = the headline figure (it counts up on screen); label = the small line under it
-    dict(big="#1", label="All India Rank", title="Meritorious Student Scholarship", org="Government of India",
-         text="Awarded $1,500 after achieving <strong>All India Rank 1</strong> in the national secondary school examinations."),
-    dict(big="$100K", label="per year", title="Foreign Student Scholarship", org="Cornell University",
-         text="About $100,000 a year in institutional support."),
+    dict(big="$400K", label="scholarship", title="Foreign Student Scholarship", org="Cornell University",
+         text="About $400,000 in institutional support across my four years at Cornell."),
     dict(big="$7,000", label="research stipend", title="Bowers Undergraduate Research Experience (BURE) Scholarship", org="Cornell University",
          text="Selected for continued support through the BURE Academic Year Expansion Program."),
     dict(big="$6,000", label="summer grant", title="Summer Experiential Grant", org="Cornell University",
          text="Awarded to support summer research in 2026."),
+    dict(big="#1", label="All India Rank", title="Meritorious Student Scholarship", org="Government of India",
+         text="Awarded $1,500 after achieving <strong>All India Rank 1</strong> in the national secondary school examinations."),
 ]
 
 # ── PROJECTS ─────────────────────────────────────────────────────────────────
