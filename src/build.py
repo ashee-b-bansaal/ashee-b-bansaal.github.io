@@ -45,6 +45,15 @@ SOCIAL = f'''<ul class="nav-icons">
     </ul>'''
 
 
+def analytics():
+    """Google Analytics 4, only when GA_ID is set in content.py. Section views and clicks are sent from analytics.js."""
+    if not GA_ID:
+        return ""
+    return f'''
+  <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{GA_ID}")</script>'''
+
+
 def head(title_suffix, fonts, desc, theme="#ffffff"):
     return f'''<!doctype html>
 <html lang="en">
@@ -62,7 +71,7 @@ def head(title_suffix, fonts, desc, theme="#ffffff"):
   <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <script>try{{var t=localStorage.getItem("theme")}}catch(e){{}}document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")</script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">{analytics()}
 </head>
 <body class="{title_suffix}">
   <a class="skip" href="#about">Skip to content</a>
@@ -499,7 +508,7 @@ def penguin_svg(cls="", ident=""):
 def build_assets():
     read = lambda f: open(os.path.join(HERE, f), encoding="utf-8").read()
     open(os.path.join(ROOT, "style.css"), "w").write(read("base.css") + "\n" + read("theme.css"))
-    open(os.path.join(ROOT, "app.js"), "w").write("\n".join(read(f) for f in ("base.js", "photos.js", "julia.js", "penguin.js", "extras.js")))
+    open(os.path.join(ROOT, "app.js"), "w").write("\n".join(read(f) for f in ("base.js", "photos.js", "julia.js", "penguin.js", "extras.js", "analytics.js")))
 
 
 if "--watch" in sys.argv:

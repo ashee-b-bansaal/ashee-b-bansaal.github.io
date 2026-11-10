@@ -17,6 +17,7 @@ NAME = "Ashee B Bansaal"
 EMAIL = "ab3235@cornell.edu"
 GITHUB = "https://github.com/ashee-b-bansaal"
 LINKEDIN = "https://linkedin.com/in/ashee-b-bansaal"
+GA_ID = "G-SLHQKPLPWH"  # Google Analytics 4 measurement ID, e.g. "G-ABC123XYZ9" ("" = no analytics)
 TAGLINE = "Software &amp; ML Engineering · CS @ Cornell"
 
 ABOUT_HEAD = "Hi, I'm Ashee."

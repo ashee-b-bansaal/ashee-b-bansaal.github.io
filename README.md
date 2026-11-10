@@ -22,7 +22,7 @@ This opens the site at `http://localhost:8000` in edit mode. Click any text to c
 | `src/build.py` | Generates `index.html`, `style.css`, `app.js` |
 | `src/editor.py`, `editor.js`, `editor.css` | The local in-browser editor |
 | `src/base.css`, `theme.css` | Styles (layout, then the scrapbook look) |
-| `src/base.js`, `photos.js`, `julia.js`, `penguin.js`, `extras.js` | Behaviour: light/dark switch, nav and fade-ins, draggable photos, the fractal background, the penguins, the award count-up |
+| `src/base.js`, `photos.js`, `julia.js`, `penguin.js`, `extras.js`, `analytics.js` | Behaviour: light/dark switch, nav and fade-ins, draggable photos, the fractal background, the penguins, the award count-up, analytics events (`analytics.js`, on when `GA_ID` is set) |
 | `photos/`, `logos/` | Images used on the page |
 
 Don't edit `index.html`, `style.css` or `app.js` directly. They're overwritten on every build.
